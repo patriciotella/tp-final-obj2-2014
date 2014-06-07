@@ -13,15 +13,8 @@ public class Cliente {
 		this.dni=d;
 		this.direccion=dir;
 		this.subcripcionOfertas=false;
-	}
-	/*public ClienteConCta (String n, long d, String dir){
-		//contructor de cliente con cta cte
-		this.nombre=n;
-		this.dni=d;
-		this.direccion=dir;
-		this.subscripcionOfertas=false;
 		this.ctacte=new CuentaCorriente();
-	}*/
+	}
 	public String getNombre(){
 		return this.nombre;
 	}
@@ -34,8 +27,14 @@ public class Cliente {
 	public void setDireccion(String dir){
 		this.direccion=dir;
 	}
-	public void subscribirseALasOfertasDe(SistemaVentas sist){
+	public void subscribirseALasOfertasDe(/*SistemaVentas sist*/){
 		this.subcripcionOfertas=true;
+	}
+	public void cancelarSubscripcionAOfertas(){
+		this.subcripcionOfertas=false;
+	}
+	public boolean recibeOferta(){
+		return this.subcripcionOfertas;
 	}
 
 }
