@@ -1,18 +1,19 @@
 package sistema;
 
-public class Cliente {
+import java.util.Observable;
+import java.util.Observer;
+
+public class Cliente implements Observer {
 	
 	private String nombre;
 	private long dni;
 	private String direccion;
 	private CuentaCorriente ctacte;
-	private boolean subcripcionOfertas;
 	
 	public Cliente (String n, long d, String dir){
 		this.nombre=n;
 		this.dni=d;
 		this.direccion=dir;
-		this.subcripcionOfertas=false;
 		this.ctacte=new CuentaCorriente();
 	}
 	public String getNombre(){
@@ -27,14 +28,14 @@ public class Cliente {
 	public void setDireccion(String dir){
 		this.direccion=dir;
 	}
-	public void subscribirseALasOfertasDe(/*SistemaVentas sist*/){
-		this.subcripcionOfertas=true;
+	public void subscribirseALasOfertasDe(SistemaVentas sist){
+		//VA EL UPDATE??
 	}
-	public void cancelarSubscripcionAOfertas(){
-		this.subcripcionOfertas=false;
-	}
-	public boolean recibeOferta(){
-		return this.subcripcionOfertas;
+	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
