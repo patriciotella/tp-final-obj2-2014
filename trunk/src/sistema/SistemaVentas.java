@@ -1,13 +1,25 @@
 package sistema;
 
 import java.util.List;
+import java.util.Observable;
 
-public class SistemaVentas {
+import productos.Oferta;
+
+public class SistemaVentas extends Observable {
 	
 	private List<Tienda> sucursales;
 	private List<Cliente> clientes;
+	private List<Oferta> ofertas;
 	
+	public void agregarOferta(Oferta unaOferta){
+		ofertas.add(unaOferta);
+		notificar(unaOferta);
+	}
 	
+	private void notificar(Oferta unaOferta){
+		setChanged();
+		notifyObservers(unaOferta);
+	}
 	
 	/*
 	 ubicarProducto(Sucursal,Producto)
