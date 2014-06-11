@@ -13,4 +13,7 @@ public class PresentacionEnOferta extends Oferta {
 		return presentacion;
 	}
 
+	/*public Double calcularPrecio(){
+	 *	return this.presentacion.getPrecioUnitarioVenta()*getDescuento();
+	 */
 }

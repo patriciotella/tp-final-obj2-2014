@@ -28,8 +28,8 @@ public class Cliente implements Observer {
 	public void setDireccion(String dir){
 		this.direccion=dir;
 	}
-	public void subscribirseALasOfertasDe(SistemaVentas sist){
-		//VA EL UPDATE??
+	public void subscribirseALasOfertasDe(SistemaVentas unSistemaDeVentas){
+		unSistemaDeVentas.addObserver(this);
 	}
 	
 	@Override

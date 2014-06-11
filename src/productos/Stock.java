@@ -12,6 +12,14 @@ public class Stock {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+
+	public boolean esStockMinimo() {
+		return presentacion.getStockMinimo() == cantidad;
+	}
+
+	public boolean esStockCritico() {
+		return presentacion.getStockCritico() == cantidad;
+	}
 	
 	
 

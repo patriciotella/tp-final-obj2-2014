@@ -8,6 +8,12 @@ public class Ubicacion {
 	private int estante;
 	private Tienda tienda;
 	
+	public Ubicacion(Tienda unaTienda, int unPasillo, int unEstante){
+		pasillo = unPasillo;
+		estante = unEstante;
+		tienda = unaTienda;
+	}
+	
 	public int getPasillo() {
 		return pasillo;
 	}
