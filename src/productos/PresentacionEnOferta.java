@@ -12,5 +12,10 @@ public class PresentacionEnOferta extends Oferta {
 	{
 		return this.presentacion.getPrecioUnitarioVenta()*getDescuento();
 	}
+
+	@Override
+	public Double getPrecio() {
+		return this.presentacion.getPrecioUnitarioVenta()*getDescuento();
+	}
 	 
 }

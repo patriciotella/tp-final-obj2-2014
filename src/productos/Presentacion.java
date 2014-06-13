@@ -2,7 +2,7 @@ package productos;
 
 import java.util.List;
 
-public class Presentacion {
+public class Presentacion implements Articulo{
 	 private String codigoBarras;
 	 private int stockMinimo;
 	 private int stockCritico;
@@ -66,4 +66,8 @@ public class Presentacion {
 	 public void setPrecioUnitarioVenta(float p){
 		 this.precioUnitarioVenta=p;
 	 }
+	@Override
+	public Double getPrecio() {
+		return (double)this.precioUnitarioVenta;
+	}
 }

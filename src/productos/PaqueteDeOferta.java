@@ -16,4 +16,14 @@ public class PaqueteDeOferta extends Oferta {
 		return (resultado*this.getDescuento());
 	}
 
+	@Override
+	public Double getPrecio() {
+		double resultado=0;
+		for (Oferta oferta : ofertas) {
+			resultado += oferta.calcularPrecio();
+			
+		}
+		return (resultado*this.getDescuento());
+	}
+
 }
