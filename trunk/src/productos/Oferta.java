@@ -1,6 +1,6 @@
 package productos;
 
-public abstract class Oferta {
+public abstract class Oferta implements Articulo {
 	
 	private double descuento;
 
