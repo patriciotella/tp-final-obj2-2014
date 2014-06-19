@@ -8,14 +8,19 @@ public class PresentacionEnOferta extends Oferta {
 		return presentacion;
 	}
 
-	public double calcularPrecio()
+	public float calcularPrecio()
 	{
 		return this.presentacion.getPrecioUnitarioVenta()*getDescuento();
 	}
 
 	@Override
-	public Double getPrecio() {
+	public float getPrecio() {
 		return this.presentacion.getPrecioUnitarioVenta()*getDescuento();
+	}
+
+	@Override
+	public float getPrecioCompra() {
+		return this.presentacion.getPrecioCompra();
 	}
 	 
 }
