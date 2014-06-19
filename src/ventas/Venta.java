@@ -34,6 +34,17 @@ public abstract class Venta {
 	}
 	
 	/**
+	 * Retorna la ganancia producto de las ventas concretadas.
+	 * El precio total de la venta - el precio de costo.
+	 * @return
+	 */
+	public float getGanancia(){
+		Float montoFinal = 0f;
+		for(Articulo articulo : articulos)
+			montoFinal += (articulo.getPrecio()-articulo.getPrecioCompra());
+		return montoFinal;
+	}
+	/**
 	 * Retorna el cliente que hizo la compra.
 	 * @return Cliente.
 	 */
@@ -47,6 +58,15 @@ public abstract class Venta {
 	 */
 	public List<Articulo> getDetalle(){
 		return articulos;
+	}
+
+	/**
+	 * Retorna si esta venta fue realizada por el Cliente unCliente
+	 * @param unCliente
+	 * @return boolean
+	 */
+	public boolean fueCompradaPor(Cliente unCliente) {
+		return unCliente.equals(this.cliente);
 	}
 
 }

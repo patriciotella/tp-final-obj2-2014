@@ -3,7 +3,7 @@ package productos;
 public class Stock {
 	
 	private int cantidad;
-	private Presentacion presentacion;
+	private Presentacion presentacion;//Ver si puede ser una Oferta también.
 
 	public int getCantidad() {
 		return cantidad;
@@ -19,6 +19,14 @@ public class Stock {
 
 	public boolean esStockCritico() {
 		return presentacion.getStockCritico() == cantidad;
+	}
+	
+	public Presentacion getPresentacion() {
+		return this.presentacion;
+	}
+
+	public boolean esStockDePresentacion(Presentacion unaPresentacion) {
+		return this.presentacion.equals(unaPresentacion);
 	}
 	
 	
