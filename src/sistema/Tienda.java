@@ -15,18 +15,34 @@ public class Tienda {
 								// cambio hay
 								// que buscar la venta y cancelarla.
 
+	/**
+	 * Registra una venta realizada en la tienda.
+	 * @param unaVenta
+	 */
 	public void registrarVenta(Venta unaVenta) {
 		this.ventas.add(unaVenta);
 	}
 
+	/**
+	 * Retorna las ventas realizadas en la tienda.
+	 * @return List<Venta>
+	 */
 	public List<Venta> getVentasRealizadas() {
 		return this.ventas;
 	}
 
+	/**
+	 * Retorna una lista con los stocks de los artículos de la tienda.
+	 * @return List<Stock>
+	 */
 	public List<Stock> getStock() {
 		return this.stock;
 	}
 
+	/**
+	 * Retorna las presentaciones que tienen stock mínimo.
+	 * @return List<Stock>
+	 */
 	public List<Stock> getPresentacionesConStockMinimo() {
 		List<Stock> stocksMinimos = new LinkedList<Stock>();
 		for (Stock stockPresentacion : this.stock) {
@@ -36,6 +52,10 @@ public class Tienda {
 		return stocksMinimos;
 	}
 
+	/**
+	 * Retorna las presentaciones que tienen stock crítico.
+	 * @return List<Stock>
+	 */
 	public List<Stock> getPresentacionesConStockCritico() {
 		List<Stock> stocksCriticos = new LinkedList<Stock>();
 		for (Stock stockPresentacion : stock) {
@@ -45,6 +65,7 @@ public class Tienda {
 		return stocksCriticos;
 	}
 
+	//A PARTIR DE ACÁ HAY UN PAR REPETIDAS Y NO SÉ POR QUÉ.
 	public List<Venta> ventasRealizadas() {
 		return this.ventas;
 	}
@@ -73,24 +94,39 @@ public class Tienda {
 		return retorno;
 	}
 
+	/**
+	 * Retorna la cantidad de plata que lleva gastada un cliente en la tienda.
+	 * @param unCliente
+	 * @return float
+	 */
 	public float montoCompradoPor(Cliente unCliente) {
-
 		float montoTotal = 0f;
-
 		for (Venta venta : this.ventas) {
 			if (venta.fueCompradaPor(unCliente))
 				montoTotal += venta.getMonto();
 		}
-
 		return montoTotal;
 	}
 
+	/**
+	 * Ubica una presentación en la tienda (en un pasillo y un estante).
+	 * @param unaPresentacion
+	 * @param unaUbicacion
+	 * @throws PresentacionNotFoundException
+	 */
 	public void ubicarPresentacion(Presentacion unaPresentacion,
 			Ubicacion unaUbicacion) throws PresentacionNotFoundException {
 		this.buscarPresentacionEnTienda(unaPresentacion).setUbicacion(
 				unaUbicacion);
 	}
 
+	/**
+	 * Busca y retorna la presentación en la tienda, si no la encuentra
+	 * levanta una PresentacionNotFoundException.
+	 * @param unaPresentacion
+	 * @return
+	 * @throws PresentacionNotFoundException
+	 */
 	private Presentacion buscarPresentacionEnTienda(Presentacion unaPresentacion)
 			throws PresentacionNotFoundException {
 		for (Stock stock : this.stock) {
@@ -106,6 +142,10 @@ public class Tienda {
 		
 	}
 	
+	/**
+	 * Retorna la ganancia que tiene la tienda.
+	 * @return float
+	 */
 	public float getGanancia(){
 		float gananciaTotal = 0f;
 		for(Venta venta : this.ventas)

@@ -32,15 +32,15 @@ public class VentaDirectaTest {
 		articulos.add(articulo1);
 		articulos.add(articulo2);
 		articulos.add(articulo3);
-		unaVentaDirecta = new VentaDirecta(articulos, unCliente);
+		unaVentaDirecta = new VentaDirecta(articulos, unCliente, null);
 	}
 	
 	@Test
 	public void testGetMonto() {
-		Mockito.when(articulo1.getPrecio()).thenReturn(20d);
-		Mockito.when(articulo2.getPrecio()).thenReturn(15.3d);
-		Mockito.when(articulo3.getPrecio()).thenReturn(6d);
-		assertEquals(unaVentaDirecta.getMonto(), 41.3d, 0d);
+		Mockito.when(articulo1.getPrecio()).thenReturn(20f);
+		Mockito.when(articulo2.getPrecio()).thenReturn(15.3f);
+		Mockito.when(articulo3.getPrecio()).thenReturn(6f);
+		assertEquals(unaVentaDirecta.getMonto(), 41.3f, 0f);
 		Mockito.verify(articulo1).getPrecio();
 		Mockito.verify(articulo2).getPrecio();
 		Mockito.verify(articulo3).getPrecio();
