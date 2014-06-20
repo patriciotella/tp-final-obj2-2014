@@ -2,6 +2,8 @@ package ventas;
 
 import java.util.List;
 
+import org.joda.time.LocalDate;
+
 import productos.Articulo;
 import sistema.Cliente;
 
@@ -9,6 +11,7 @@ public abstract class Venta {
 	
 	private List<Articulo> articulos;
 	private Cliente cliente;
+	private LocalDate fecha;
 	
 	/**
 	 * Crea una instancia de venta.
@@ -16,9 +19,10 @@ public abstract class Venta {
 	 *        Articulo.
 	 * @param unCliente: una instancia de Cliente.
 	 */
-	protected Venta(List<Articulo> unaListaDeArticulos, Cliente unCliente){
+	protected Venta(List<Articulo> unaListaDeArticulos, Cliente unCliente, LocalDate unaFecha){
 		articulos = unaListaDeArticulos;
 		cliente = unCliente;
+		fecha = unaFecha;
 	}
 	
 	/**
@@ -69,4 +73,15 @@ public abstract class Venta {
 		return unCliente.equals(this.cliente);
 	}
 
+	/**
+	 * Retorna la fecha en que se creó la venta.
+	 * @return LocalDate
+	 */
+	public LocalDate getFecha(){
+		return fecha;
+	}
+
+	public boolean incluyeArticulo(Articulo unArticulo) {
+		return this.articulos.contains(unArticulo);
+	}
 }

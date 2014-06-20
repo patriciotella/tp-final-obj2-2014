@@ -1,9 +1,11 @@
 package sistema;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
 
 import productos.Oferta;
+import ventas.Venta;
 
 public class SistemaVentas extends Observable {
 	
@@ -19,6 +21,13 @@ public class SistemaVentas extends Observable {
 	private void notificar(Oferta unaOferta){
 		setChanged();
 		notifyObservers(unaOferta);
+	}
+
+	public List<Venta> getVentas() {
+		List<Venta> ventasDeTiendas = new LinkedList<Venta>();
+		for(Tienda tienda : sucursales)
+			ventasDeTiendas.addAll(tienda.getVentasRealizadas());
+		return ventasDeTiendas;
 	}
 	
 	/*
