@@ -2,6 +2,10 @@ package productos;
 
 import java.util.List;
 
+/**
+ * Esta clase representa un paquete de ofertas, es decir un conjunto de productos u otras ofertas a su vez.
+ * Cada paquete de ofertas tiene una lista de ofertas conteniendo todos los productos ofertados.
+ */
 public class PaqueteDeOferta extends Oferta {
 	
 	private List<Oferta> ofertas;

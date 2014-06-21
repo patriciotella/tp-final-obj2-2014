@@ -3,6 +3,10 @@ package sistema;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Representa a un cliente dentro del sistema de ventas.
+ * Un cliente tiene nombre, dni, direccion y una cuenta corriente
+ */
 public class Cliente implements Observer {
 	
 	private String nombre;
@@ -16,18 +20,51 @@ public class Cliente implements Observer {
 		this.direccion=dir;
 		this.ctacte=new CuentaCorriente();
 	}
+	
+	/**
+	 * Retorna el nombre de un cliente.
+	 * @return String
+	 */
 	public String getNombre(){
 		return this.nombre;
 	}
+	
+	/**
+	 * Retorna el DNI de un cliente.
+	 * @return long
+	 */
 	public long getDNI(){
 		return this.dni;
 	}
+	
+	/**
+	 * Retorna la direccion de un cliente.
+	 * @return String
+	 */
 	public String getDireccion(){
 		return this.direccion;
 	}
-	public void setDireccion(String dir){
-		this.direccion=dir;
+	
+	/**
+	 * Retorna la cuenta corriente del cliente
+	 * @return
+	 */
+	public CuentaCorriente getCuentaCorriente() {
+		return this.getCuentaCorriente();
 	}
+	
+	/**
+	 * Establece la direccion de un cliente
+	 * @param String unaDireccion
+	 */
+	public void setDireccion(String unaDireccion){
+		this.direccion = unaDireccion;
+	}
+	
+	/**
+	 * Subscribe al cliente a la lista para recibir las ultimas ofertas de la tienda.
+	 * @param SistemaVentas unSistemaDeVentas
+	 */
 	public void subscribirseALasOfertasDe(SistemaVentas unSistemaDeVentas){
 		unSistemaDeVentas.addObserver(this);
 	}

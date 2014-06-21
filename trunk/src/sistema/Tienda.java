@@ -8,6 +8,10 @@ import productos.Stock;
 import productos.Ubicacion;
 import ventas.Venta;
 
+/**
+ * Clase que representa una sucursal dentro de nuestro sistema de ventas.
+ * Cuenta con una lista del Stock y otra de las Ventas realizadas dentro de la Tienda.
+ */
 public class Tienda {
 
 	private List<Stock> stock;
