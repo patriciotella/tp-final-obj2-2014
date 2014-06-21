@@ -38,9 +38,9 @@ public class VentaDirectaTest {
 	@Test
 	public void testGetMonto() {
 		Mockito.when(articulo1.getPrecio()).thenReturn(20f);
-		Mockito.when(articulo2.getPrecio()).thenReturn(15.3f);
+		Mockito.when(articulo2.getPrecio()).thenReturn(15f);
 		Mockito.when(articulo3.getPrecio()).thenReturn(6f);
-		assertEquals(unaVentaDirecta.getMonto(), 41.3f, 0f);
+		assertEquals(unaVentaDirecta.getMonto(), 41f, 0f);
 		Mockito.verify(articulo1).getPrecio();
 		Mockito.verify(articulo2).getPrecio();
 		Mockito.verify(articulo3).getPrecio();
