@@ -29,8 +29,8 @@ public abstract class Venta {
 	 * Retorna la suma de los precios de los artículos de la venta.
 	 * @return Double.
 	 */
-	public Double getMonto(){
-		Double montoFinal = 0d;
+	public Float getMonto(){
+		Float montoFinal = 0f;
 		for(Articulo articulo : articulos){
 			montoFinal += articulo.getPrecio();
 		}

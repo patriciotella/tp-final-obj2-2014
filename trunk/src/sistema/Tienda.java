@@ -29,6 +29,14 @@ public class Tienda {
 	}
 	
 	/**
+	 * Crea una instancia de Tienda, sin ventas ni stock.
+	 */
+	public Tienda(){
+		this.stock = new LinkedList<Stock>();
+		this.ventas = new LinkedList<Venta>();
+	}
+	
+	/**
 	 * Registra una venta realizada en la tienda.
 	 * @param unaVenta
 	 */
@@ -162,7 +170,7 @@ public class Tienda {
 	public float getGanancia(){
 		float gananciaTotal = 0f;
 		for(Venta venta : this.ventas)
-			gananciaTotal += venta.getMonto();
+			gananciaTotal += venta.getGanancia();
 		return gananciaTotal;
 	}
 	
