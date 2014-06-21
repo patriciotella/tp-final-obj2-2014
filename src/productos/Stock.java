@@ -8,7 +8,16 @@ public class Stock {
 	
 	private int cantidad;
 	private Presentacion presentacion;//Ver si puede ser una Oferta también.
-
+	
+	/**
+	 * Constructor de clase Strock
+	 * @param cant
+	 * @param p
+	 */
+	public Stock (int cant, Presentacion p){
+		this.cantidad = cant;
+		this.presentacion=p;
+	}
 	/**
 	 * Retorna la cantidad que hay en la tienda de la Presentacion.
 	 * @return int

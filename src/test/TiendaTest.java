@@ -61,29 +61,29 @@ public class TiendaTest {
 	
 	@Test
 	public void testGetPresentacionesConStockMinimo() {
+		
 		Presentacion presentacion1 = Mockito.mock(Presentacion.class);
 		Presentacion presentacion2 = Mockito.mock(Presentacion.class);
 		Presentacion presentacion3 = Mockito.mock(Presentacion.class);
-		
-		Stock stock1 = Mockito.mock(Stock.class);
-		Stock stock2 = Mockito.mock(Stock.class);
-		Stock stock3 = Mockito.mock(Stock.class);
 		
 		Mockito.when(presentacion1.getStockMinimo()).thenReturn(23);
 		Mockito.when(presentacion2.getStockMinimo()).thenReturn(25);
 		Mockito.when(presentacion3.getStockMinimo()).thenReturn(40);
 		
-		Mockito.when(stock1.getCantidad()).thenReturn(23);
-		Mockito.when(stock2.getCantidad()).thenReturn(30);
-		Mockito.when(stock3.getCantidad()).thenReturn(40);
+		Stock stock1= new Stock(23, presentacion1);
+		Stock stock2= new Stock(30, presentacion2);
+		Stock stock3= new Stock(40, presentacion3);
 		
-		Mockito.when(stock1.getPresentacion()).thenReturn(presentacion1);
-		Mockito.when(stock2.getPresentacion()).thenReturn(presentacion2);
-		Mockito.when(stock3.getPresentacion()).thenReturn(presentacion3);
+		stock = new LinkedList<Stock>();
+		stock.add(stock1);
+		stock.add(stock2);
+		stock.add(stock3);		
 		
-		Mockito.when(stock1.esStockMinimo()).thenReturn(true);
-		Mockito.when(stock2.esStockMinimo()).thenReturn(true);
-		Mockito.when(stock3.esStockMinimo()).thenReturn(true);
+		ventas = new LinkedList<Venta>();
+		ventas.add(venta3);
+		ventas.add(venta2);
+		
+		tienda = new Tienda(stock, ventas);
 		
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock1));
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock3));
