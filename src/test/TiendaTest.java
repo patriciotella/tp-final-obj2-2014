@@ -25,8 +25,7 @@ public class TiendaTest {
 
 	@Before
 	public void setUp() {
-		tienda = Mockito.mock(Tienda.class);
-		
+				
 		ventas = new LinkedList<Venta>();
 		ventas.add(venta3);
 		ventas.add(venta2);
@@ -35,33 +34,40 @@ public class TiendaTest {
 		stock.add(stock1);
 		stock.add(stock2);
 		stock.add(stock3);
+		
+		tienda = new Tienda(stock, ventas);
 	}
 
 	@Test
 	public void testRegistrarVenta() {
-		Mockito.when(tienda.getVentasRealizadas()).thenReturn(ventas);
+		
 		tienda.registrarVenta(venta1);
 		assertTrue(tienda.getVentasRealizadas().contains(venta1));		
 	}
 	
 	@Test
 	public void testGetVentasRealizadas() {
-		Mockito.when(tienda.getVentasRealizadas()).thenReturn(ventas);
+		
 		assertEquals(tienda.getVentasRealizadas(), ventas);
 	}
 	
 	@Test
 	public void testGetStock() {
-		Mockito.when(tienda.getStock()).thenReturn(stock);
+		
 		assertEquals(tienda.getStock(), stock);
 	}
 	
 	/* ESTE TEST FALLA Y SEGURO ES PORQUE HICE MUCHO LIO CON LOS MOKITOS ASHUDA */
+	
 	@Test
 	public void testGetPresentacionesConStockMinimo() {
 		Presentacion presentacion1 = Mockito.mock(Presentacion.class);
 		Presentacion presentacion2 = Mockito.mock(Presentacion.class);
 		Presentacion presentacion3 = Mockito.mock(Presentacion.class);
+		
+		Stock stock1 = Mockito.mock(Stock.class);
+		Stock stock2 = Mockito.mock(Stock.class);
+		Stock stock3 = Mockito.mock(Stock.class);
 		
 		Mockito.when(presentacion1.getStockMinimo()).thenReturn(23);
 		Mockito.when(presentacion2.getStockMinimo()).thenReturn(25);
@@ -75,10 +81,12 @@ public class TiendaTest {
 		Mockito.when(stock2.getPresentacion()).thenReturn(presentacion2);
 		Mockito.when(stock3.getPresentacion()).thenReturn(presentacion3);
 		
+		Mockito.when(stock1.esStockMinimo()).thenReturn(true);
+		Mockito.when(stock2.esStockMinimo()).thenReturn(true);
+		Mockito.when(stock3.esStockMinimo()).thenReturn(true);
+		
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock1));
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock3));
 	}
-	
-	
 
 }

@@ -23,7 +23,7 @@ public class UbicacionTest {
 	@Before
 	public void setUp() {
 		ubicacion = Mockito.mock(Ubicacion.class);
-		tienda = new Tienda();
+		tienda = Mockito.mock(Tienda.class);
 		otraUbicacion = new Ubicacion(null, 0, 0);
 	}
 

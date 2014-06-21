@@ -18,7 +18,16 @@ public class Tienda {
 	private List<Venta> ventas;// Lo mismo con las ventas, para devolución y
 								// cambio hay
 								// que buscar la venta y cancelarla.
-
+	/**
+	 * Constructor de Clase Tienda
+	 * @param stk
+	 * @param vta
+	 */
+	public Tienda(List<Stock> stk, List<Venta> vta){
+		this.stock=stk;
+		this.ventas=vta;
+	}
+	
 	/**
 	 * Registra una venta realizada en la tienda.
 	 * @param unaVenta
