@@ -8,6 +8,10 @@ public abstract class Oferta implements Articulo {
 	
 	private float descuento;
 
+	protected Oferta(float unDescuento) {
+		this.descuento = unDescuento;
+	}
+	
 	/**
 	 * Retorna el descuento que se le hara al Articulo.
 	 * @return float
