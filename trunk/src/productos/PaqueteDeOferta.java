@@ -10,6 +10,11 @@ public class PaqueteDeOferta extends Oferta {
 	
 	private List<Oferta> ofertas;
 
+	public PaqueteDeOferta(List<Oferta> unaListaDeOfertas, float unDescuento) {
+		super(unDescuento);
+		this.ofertas = unaListaDeOfertas;
+	}
+	
 	@Override
 	public float calcularPrecio() {
 		float resultado = 0f;
@@ -24,10 +29,10 @@ public class PaqueteDeOferta extends Oferta {
 	public float getPrecio() {
 		float resultado = 0f;
 		for (Oferta oferta : ofertas) {
-			resultado += oferta.calcularPrecio();
+			resultado += oferta.getPrecio();
 			
 		}
-		return (resultado*this.getDescuento());
+		return (resultado/this.getDescuento());
 	}
 
 	@Override
@@ -37,5 +42,12 @@ public class PaqueteDeOferta extends Oferta {
 			precioCompra += oferta.getPrecioCompra();
 		return precioCompra;
 	}
+	
+	public void agregarOferta(Oferta unaOferta) {
+		this.ofertas.add(unaOferta);
+	}
 
+	public List<Oferta> getOfertas() {
+		return this.ofertas;
+	}
 }

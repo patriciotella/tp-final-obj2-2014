@@ -23,14 +23,14 @@ public class CuentaCorriente {
 	public double getSaldo(){
 		return this.saldo;
 	}
-	public void setSaldo(double s){
-		this.saldo=s;
+	public void setSaldo(double unMonto){
+		this.saldo = unMonto;
 	}
-	public void depositarSaldo(Double s){
-		this.setSaldo(this.getSaldo()+s);
+	public void depositarSaldo(Double unMonto){
+		this.saldo += unMonto;
 	}
-	public void descontarSaldo(Double s){
-		this.setSaldo(this.getSaldo()-s);
-	}
+	public void descontarSaldo(Double unMonto){
+		this.saldo -= unMonto; //<- Ver si puede tener saldo negativo, si no
+	}                          // Exception.
 
 }
