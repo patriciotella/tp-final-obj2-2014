@@ -9,28 +9,29 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import productos.Oferta;
+import productos.Articulo;
 import productos.PaqueteDeOferta;
+import productos.Presentacion;
 import productos.PresentacionEnOferta;
 
 public class PaqueteDeOfertaTest {
 
 	PaqueteDeOferta unPaquete;
-	PresentacionEnOferta caramelo;
+	Presentacion caramelo;
 	PresentacionEnOferta chicle;
 	PresentacionEnOferta tetra;
-	List<Oferta> ofertas;
+	List<Articulo> articulos;
 	
 	@Before
 	public void setUp() {
-		caramelo = Mockito.mock(PresentacionEnOferta.class);
+		caramelo = Mockito.mock(Presentacion.class);
 		chicle = Mockito.mock(PresentacionEnOferta.class);
 		tetra = Mockito.mock(PresentacionEnOferta.class);
-		ofertas = new LinkedList<Oferta>();
-		ofertas.add(caramelo);
-		ofertas.add(chicle);
-		ofertas.add(tetra);
-		unPaquete = new PaqueteDeOferta(ofertas, 1.1f);
+		articulos = new LinkedList<Articulo>();
+		articulos.add(caramelo);
+		articulos.add(chicle);
+		articulos.add(tetra);
+		unPaquete = new PaqueteDeOferta(articulos, 1.1f);
 	}
 
 	@Test
@@ -57,7 +58,7 @@ public class PaqueteDeOfertaTest {
 	
 	@Test
 	public void testGetOfertas() {
-		assertEquals(unPaquete.getOfertas(), ofertas);
+		assertEquals(unPaquete.getOfertas(), articulos);
 	}
 	
 	@Test

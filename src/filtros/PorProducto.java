@@ -3,16 +3,16 @@ package filtros;
 import productos.Articulo;
 import ventas.Venta;
 
-public class FiltroPorProducto extends FiltroDeVentas {
+public class PorProducto implements Criterio<Venta> {
 
 	private Articulo articulo;
 
-	public FiltroPorProducto(Articulo unArticulo){
+	public PorProducto(Articulo unArticulo){
 		this.articulo = unArticulo;
 	}
 	
 	@Override
-	protected boolean cumpleCriterioDeFiltro(Venta venta) {
+	public boolean cumpleCriterioDeFiltro(Venta venta) {
 		return venta.incluyeArticulo(this.articulo);
 	}
 

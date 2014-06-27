@@ -8,28 +8,28 @@ import java.util.List;
  */
 public class PaqueteDeOferta extends Oferta {
 	
-	private List<Oferta> ofertas;
+	private List<Articulo> articulos;
 
-	public PaqueteDeOferta(List<Oferta> unaListaDeOfertas, float unDescuento) {
+	public PaqueteDeOferta(List<Articulo> unaListaDeArticulos, float unDescuento) {
 		super(unDescuento);
-		this.ofertas = unaListaDeOfertas;
+		this.articulos = unaListaDeArticulos;
 	}
 	
-	@Override
+	/*@Override
 	public float calcularPrecio() {
 		float resultado = 0f;
-		for (Oferta oferta : ofertas) {
-			resultado += oferta.calcularPrecio();
+		for (Articulo articulo : this.articulos) {
+			resultado += articulo.calcularPrecio();
 			
 		}
 		return (resultado*this.getDescuento());
-	}
+	}*/
 
 	@Override
 	public float getPrecio() {
 		float resultado = 0f;
-		for (Oferta oferta : ofertas) {
-			resultado += oferta.getPrecio();
+		for (Articulo articulo : this.articulos) {
+			resultado += articulo.getPrecio();
 			
 		}
 		return (resultado/this.getDescuento());
@@ -38,16 +38,16 @@ public class PaqueteDeOferta extends Oferta {
 	@Override
 	public float getPrecioCompra() {
 		float precioCompra = 0f;
-		for(Oferta oferta : ofertas)
-			precioCompra += oferta.getPrecioCompra();
+		for(Articulo articulo : this.articulos)
+			precioCompra += articulo.getPrecioCompra();
 		return precioCompra;
 	}
 	
 	public void agregarOferta(Oferta unaOferta) {
-		this.ofertas.add(unaOferta);
+		this.articulos.add(unaOferta);
 	}
 
-	public List<Oferta> getOfertas() {
-		return this.ofertas;
+	public List<Articulo> getOfertas() {
+		return this.articulos;
 	}
 }

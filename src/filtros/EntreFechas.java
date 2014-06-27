@@ -4,18 +4,18 @@ import org.joda.time.LocalDate;
 
 import ventas.Venta;
 
-public class FiltroEntreFechas extends FiltroDeVentas {
+public class EntreFechas implements Criterio<Venta> {
 
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 
-	public FiltroEntreFechas(LocalDate desdeFecha, LocalDate hastaFecha) {
+	public EntreFechas(LocalDate desdeFecha, LocalDate hastaFecha) {
 		fechaInicio = desdeFecha;
 		fechaFin = hastaFecha;
 	}
 
 	@Override
-	protected boolean cumpleCriterioDeFiltro(Venta venta) {
+	public boolean cumpleCriterioDeFiltro(Venta venta) {
 		return venta.getFecha().isAfter(fechaInicio)
 				&& venta.getFecha().isBefore(fechaFin);
 	}
