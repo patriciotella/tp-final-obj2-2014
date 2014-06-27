@@ -16,6 +16,21 @@ public class Producto {
 	private List<Presentacion> presentaciones;
 	
 	/**
+	 * Contructor de Clase Producto
+	 * @param nombre
+	 * @param descripcion
+	 * @param marca
+	 * @param tipo
+	 * @param l
+	 */
+	public Producto(String nombre,String descripcion,String marca,String tipo,List<Presentacion> l){
+		this.nombre=nombre;
+		this.descripcion=descripcion;
+		this.marca=marca;
+		this.tipo=tipo;
+		this.presentaciones=l;
+	}
+	/**
 	 * Retorna el nombre de un producto.
 	 * @return String
 	 */
