@@ -26,7 +26,7 @@ public abstract class Venta {
 	}
 	
 	/**
-	 * Retorna la suma de los precios de los artículos de la venta.
+	 * Retorna la suma de los precios de los artï¿½culos de la venta.
 	 * @return Double.
 	 */
 	public Float getMonto(){
@@ -57,7 +57,7 @@ public abstract class Venta {
 	}
 	
 	/**
-	 * Retorna la lista de artículos comprados.
+	 * Retorna la lista de artï¿½culos comprados.
 	 * @return List<Articulo>.
 	 */
 	public List<Articulo> getDetalle(){
@@ -74,7 +74,7 @@ public abstract class Venta {
 	}
 
 	/**
-	 * Retorna la fecha en que se creó la venta.
+	 * Retorna la fecha en que se creï¿½ la venta.
 	 * @return LocalDate
 	 */
 	public LocalDate getFecha(){

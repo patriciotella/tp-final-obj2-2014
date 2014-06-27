@@ -24,10 +24,10 @@ public class PresentacionEnOferta extends Oferta {
 		return presentacion;
 	}
 
-	@Override
+	/*@Override
 	public float calcularPrecio() {
 		return this.presentacion.getPrecioUnitarioVenta() * getDescuento();
-	}
+	}*/
 
 	@Override
 	public float getPrecio() {
