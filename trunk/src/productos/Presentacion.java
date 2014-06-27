@@ -21,6 +21,29 @@ public class Presentacion implements Articulo{
 	 private String unidadeDeMedida;
 	 
 	 /**
+	  * Constructor de clase
+	  * @param cod
+	  * @param smin
+	  * @param scrit
+	  * @param puc
+	  * @param puv
+	  * @param list
+	  * @param p
+	  * @param ub
+	  * @param med
+	  */
+	 public Presentacion(String cod,int smin,int scrit,float puc, float puv,List<Float> list,Producto p,Ubicacion ub,String med){
+		 this.codigoBarras=cod;
+		 this.stockMinimo=smin;
+		 this.stockCritico=scrit;
+		 this.precioUnitarioCompra=puc;
+		 this.precioUnitarioVenta=puv;
+		 this.listaPrecios=list;
+		 this.producto=p;
+		 this.ubicacion=ub;
+		 this.unidadeDeMedida=med;
+	 }
+	 /**
 	  * Retorna el codigo de barras de la presentacion.
 	  * @return String
 	  */
