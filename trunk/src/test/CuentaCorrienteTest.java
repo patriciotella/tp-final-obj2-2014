@@ -42,4 +42,8 @@ public class CuentaCorrienteTest {
 		assertEquals(unaCuentaCorriente.getSaldo(), 299.5d, 0d);
 	}
 
+	@Test
+	public void testGetMoviemientos(){
+		assertEquals(unaCuentaCorriente.getMovimientos().size(),0);
+	}
 }
