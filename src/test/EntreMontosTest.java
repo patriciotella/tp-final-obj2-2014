@@ -13,7 +13,7 @@ public class EntreMontosTest {
 
 	EntreMontos criterioDeFiltro;
 	VentaDirecta unaVentaDirecta;
-	
+
 	@Before
 	public void setUp() {
 		unaVentaDirecta = Mockito.mock(VentaDirecta.class);
@@ -25,6 +25,13 @@ public class EntreMontosTest {
 		Mockito.when(unaVentaDirecta.getMonto()).thenReturn(29.3f);
 		assertTrue(criterioDeFiltro.cumpleCriterioDeFiltro(unaVentaDirecta));
 		Mockito.verify(unaVentaDirecta, Mockito.times(2)).getMonto();
+	}
+
+	@Test
+	public void testNoCumpleCriterioDeFiltro() {
+		Mockito.when(unaVentaDirecta.getMonto()).thenReturn(3f);
+		assertFalse(criterioDeFiltro.cumpleCriterioDeFiltro(unaVentaDirecta));
+		Mockito.verify(unaVentaDirecta, Mockito.times(1)).getMonto();
 	}
 
 }

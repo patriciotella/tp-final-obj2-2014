@@ -24,8 +24,17 @@ public class EntreFechasTest {
 
 	@Test
 	public void testCumpleCriterioDeFiltro() {
-		Mockito.when(unaVenta.getFecha()).thenReturn(new LocalDate(2014, 06, 16));
+		Mockito.when(unaVenta.getFecha()).thenReturn(
+				new LocalDate(2014, 06, 16));
 		assertTrue(criterioDeFiltro.cumpleCriterioDeFiltro(unaVenta));
+		Mockito.verify(unaVenta, Mockito.times(2)).getFecha();
+	}
+
+	@Test
+	public void testNoCumpleCriterioDeFiltro() {
+		Mockito.when(unaVenta.getFecha()).thenReturn(
+				new LocalDate(2015, 07, 20));
+		assertFalse(criterioDeFiltro.cumpleCriterioDeFiltro(unaVenta));
 		Mockito.verify(unaVenta, Mockito.times(2)).getFecha();
 	}
 
