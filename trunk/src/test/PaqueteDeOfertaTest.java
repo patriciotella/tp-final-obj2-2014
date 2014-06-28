@@ -67,4 +67,15 @@ public class PaqueteDeOfertaTest {
 		unPaquete.agregarOferta(pizza);
 		assertTrue(unPaquete.getOfertas().contains(pizza));
 	}
+	
+	@Test
+	public void testGetPrecioCompra(){
+		Mockito.when(caramelo.getPrecioCompra()).thenReturn(2f);
+		Mockito.when(chicle.getPrecioCompra()).thenReturn(3f);
+		Mockito.when(tetra.getPrecioCompra()).thenReturn(5f);
+		assertEquals(unPaquete.getPrecioCompra(), 10f, 0f);
+		Mockito.verify(caramelo).getPrecioCompra();
+		Mockito.verify(chicle).getPrecioCompra();
+		Mockito.verify(tetra).getPrecioCompra();
+	}
 }
