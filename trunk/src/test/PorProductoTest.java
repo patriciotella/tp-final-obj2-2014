@@ -16,7 +16,7 @@ public class PorProductoTest {
 	VentaDirecta ventaDirecta;
 
 	@Test
-	public void test() {
+	public void testCumpleCriterioDeFiltro() {
 		presentacion = Mockito.mock(Presentacion.class);
 		ventaDirecta = Mockito.mock(VentaDirecta.class);
 		criterioPorProducto = new PorProducto(presentacion);
@@ -24,6 +24,19 @@ public class PorProductoTest {
 		Mockito.when(ventaDirecta.incluyeArticulo(presentacion)).thenReturn(
 				true);
 		assertTrue(criterioPorProducto.cumpleCriterioDeFiltro(ventaDirecta));
+		Mockito.verify(ventaDirecta, Mockito.times(1)).incluyeArticulo(
+				presentacion);
+	}
+	
+	@Test
+	public void testNoCumpleCriterioDeFiltro() {
+		presentacion = Mockito.mock(Presentacion.class);
+		ventaDirecta = Mockito.mock(VentaDirecta.class);
+		criterioPorProducto = new PorProducto(presentacion);
+
+		Mockito.when(ventaDirecta.incluyeArticulo(presentacion)).thenReturn(
+				false);
+		assertFalse(criterioPorProducto.cumpleCriterioDeFiltro(ventaDirecta));
 		Mockito.verify(ventaDirecta, Mockito.times(1)).incluyeArticulo(
 				presentacion);
 	}
