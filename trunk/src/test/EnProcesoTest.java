@@ -6,18 +6,22 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import ventas.EnProceso;
+import ventas.EntregaADomicilio;
 
 public class EnProcesoTest {
 
 	EnProceso ventaEnProcesoQueDebeAbonar;
 	EnProceso ventaEnProcesoQueNoDebeAbonar;
+	EntregaADomicilio unaEntrega;
 	
 	@Before
 	public void setUp() {
-		ventaEnProcesoQueDebeAbonar = new EnProceso(25.5d);
-		ventaEnProcesoQueNoDebeAbonar = new EnProceso(0d);
+		unaEntrega = Mockito.mock(EntregaADomicilio.class);
+		ventaEnProcesoQueDebeAbonar = new EnProceso(unaEntrega, 25.5f);
+		ventaEnProcesoQueNoDebeAbonar = new EnProceso(unaEntrega, 0f);
 	}
 	@Test
 	public void testDebeAbonarAlgoEnEntrega() {

@@ -23,8 +23,19 @@ public abstract class Venta {
 		articulos = unaListaDeArticulos;
 		cliente = unCliente;
 		fecha = unaFecha;
+		descontarStockDeVenta(unaListaDeArticulos);
 	}
 	
+	/**
+	 * Descuenta del stock de cada artículo una unidad, producto de la venta.
+	 * @param unaListaDeArticulos
+	 */
+	private void descontarStockDeVenta(List<Articulo> unaListaDeArticulos) {
+		for(Articulo articulo : unaListaDeArticulos){
+			articulo.descontarStockDeVenta();
+		}
+	}
+
 	/**
 	 * Retorna la suma de los precios de los art�culos de la venta.
 	 * @return Double.

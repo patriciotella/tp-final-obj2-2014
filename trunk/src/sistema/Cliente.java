@@ -85,4 +85,8 @@ public class Cliente implements Observer {
 
 	}
 
+	/*public void descontarCompraDeCuenta(Float unMonto) {
+		this.ctacte.descontarSaldo(unMonto);
+	}*/
+
 }
