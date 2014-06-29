@@ -13,17 +13,27 @@ public abstract class EstadoEnvio {
 	 * 
 	 * @return boolean.
 	 */
-	public abstract boolean debeAbonarAlgoEnEntrega();
+	public boolean debeAbonarAlgoEnEntrega() throws Exception {
+		throw new Exception("Solo el envio en proceso tiene este dato");
+	}
 
 	/**
 	 * Retorna el precio que debe pagar el cliente al momento de la entrega.
 	 * 
 	 * @return Double.
 	 */
-	public abstract Float cantidadQueDebeAbonar();
+	public Float cantidadQueDebeAbonar() throws Exception {
+		throw new Exception("Solo el envio en proceso tiene este dato");
+	}
 	
 	protected EntregaADomicilio getEntregaADomicilio() {
 		return this.entrega;
 	}
+
+	public abstract void enviar() throws EnvioCanceladoException, Exception;
+
+	public abstract void cancelar() throws EnvioCanceladoException;
+
+	public abstract void reprogramar() throws EnvioCanceladoException, Exception;
 	
 }
