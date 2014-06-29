@@ -39,4 +39,16 @@ public class PresentacionEnOferta extends Oferta {
 		return this.presentacion.getPrecioCompra();
 	}
 
+
+	@Override
+	public void descontarStockDeVenta() {
+		this.presentacion.descontarStockDeVenta();
+	}
+
+
+	@Override
+	public void cancelarCompraDeArticulo() {
+		this.presentacion.cancelarCompraDeArticulo();
+	}
+
 }

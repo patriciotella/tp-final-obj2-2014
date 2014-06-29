@@ -2,6 +2,10 @@ package ventas;
 
 public class Pendiente extends EstadoEnvio {
 
+	protected Pendiente(EntregaADomicilio unEnvio) {
+		super(unEnvio);
+	}
+
 	@Override
 	public boolean debeAbonarAlgoEnEntrega() {
 		// TODO Auto-generated method stub
@@ -9,7 +13,7 @@ public class Pendiente extends EstadoEnvio {
 	}
 
 	@Override
-	public Double cantidadQueDebeAbonar() {
+	public Float cantidadQueDebeAbonar() {
 		// TODO Auto-generated method stub
 		return null;
 	}

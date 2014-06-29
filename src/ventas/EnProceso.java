@@ -2,14 +2,15 @@ package ventas;
 
 public class EnProceso extends EstadoEnvio {
 	
-	private double cantidadQueDebeAbonar;
+	private float cantidadQueDebeAbonar;
 	
 	/**
 	 * Crea una instancia de EnProceso con el precio que debe abonar el cliente al
 	 * momento de la entrega.
 	 * @param cantidadQueDebeAbonarElCliente
 	 */
-	public EnProceso(Double cantidadQueDebeAbonarElCliente){
+	public EnProceso(EntregaADomicilio unaEntrega, Float cantidadQueDebeAbonarElCliente){
+		super(unaEntrega);
 		cantidadQueDebeAbonar = cantidadQueDebeAbonarElCliente;
 	}
 	
@@ -17,7 +18,7 @@ public class EnProceso extends EstadoEnvio {
 		return (this.cantidadQueDebeAbonar()>0);
 	}
 	
-	public Double cantidadQueDebeAbonar(){
+	public Float cantidadQueDebeAbonar(){
 		return this.cantidadQueDebeAbonar;
 	}
 

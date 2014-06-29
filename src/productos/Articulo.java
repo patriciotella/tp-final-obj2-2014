@@ -16,5 +16,9 @@ public interface Articulo {
 	 * @return float
 	 */
 	public float getPrecioCompra();
+
+	public void descontarStockDeVenta();
+
+	public void cancelarCompraDeArticulo();
 	
 }

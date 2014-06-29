@@ -50,4 +50,16 @@ public class PaqueteDeOferta extends Oferta {
 	public List<Articulo> getOfertas() {
 		return this.articulos;
 	}
+
+	@Override
+	public void descontarStockDeVenta() {
+		for(Articulo articulo : this.articulos)
+			articulo.descontarStockDeVenta();
+	}
+
+	@Override
+	public void cancelarCompraDeArticulo() {
+		for(Articulo articulo : this.articulos)
+			articulo.cancelarCompraDeArticulo();
+	}
 }

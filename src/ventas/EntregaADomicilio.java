@@ -2,22 +2,21 @@ package ventas;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import productos.Articulo;
 import sistema.Cliente;
 
-public class EntregaADomicilo extends Venta {
+public class EntregaADomicilio extends Venta {
 
 	private EstadoEnvio estado;
 	private LocalDate fecha;
 	
-	protected EntregaADomicilo(List<Articulo> unaListaDeArticulos,
+	protected EntregaADomicilio(List<Articulo> unaListaDeArticulos,
 			Cliente unCliente, LocalDate unaFecha) {
 		super(unaListaDeArticulos, unCliente, unaFecha);
 		fecha = unaFecha;
-		estado = new Pendiente();
+		estado = new Pendiente(this);
 	}
 	
 	protected void setEstado(EstadoEnvio unEstado){
@@ -26,5 +25,10 @@ public class EntregaADomicilo extends Venta {
 	
 	public LocalDate getFechaCreacion(){
 		return fecha;
+	}
+
+	public void cancelarCompraDeArticulos() {
+		for(Articulo articulo : this.getDetalle())
+			articulo.cancelarCompraDeArticulo();
 	}
 }
