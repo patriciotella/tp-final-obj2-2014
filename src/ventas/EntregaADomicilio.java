@@ -11,12 +11,14 @@ public class EntregaADomicilio extends Venta {
 
 	private EstadoEnvio estado;
 	private LocalDate fecha;
+	private Float montoAPagar;
 	
-	protected EntregaADomicilio(List<Articulo> unaListaDeArticulos,
-			Cliente unCliente, LocalDate unaFecha) {
+	public EntregaADomicilio(List<Articulo> unaListaDeArticulos,
+			Cliente unCliente, LocalDate unaFecha, Float montoQueDebeAbonar) {
 		super(unaListaDeArticulos, unCliente, unaFecha);
 		fecha = unaFecha;
 		estado = new Pendiente(this);
+		montoAPagar = montoQueDebeAbonar;
 	}
 	
 	protected void setEstado(EstadoEnvio unEstado){
@@ -30,5 +32,21 @@ public class EntregaADomicilio extends Venta {
 	public void cancelarCompraDeArticulos() {
 		for(Articulo articulo : this.getDetalle())
 			articulo.cancelarCompraDeArticulo();
+	}
+	
+	public void enviar() throws Exception {
+		this.estado.enviar();
+	}
+	
+	public void cancelarEnvio() throws EnvioCanceladoException {
+		this.estado.cancelar();
+	}
+	
+	public void reprogramarEnvio() throws Exception {
+		this.estado.reprogramar();
+	}
+	
+	public Float getMontoQueDebeAbonar() {
+		return this.montoAPagar;
 	}
 }

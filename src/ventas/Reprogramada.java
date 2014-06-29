@@ -1,6 +1,7 @@
 package ventas;
 
-public class Reprogramada extends EstadoEnvio {
+public class Reprogramada extends EstadoEnvio {// No tiene mucho sentido esta
+												// clase.
 
 	protected Reprogramada(EntregaADomicilio unEnvio) {
 		super(unEnvio);
@@ -16,6 +17,24 @@ public class Reprogramada extends EstadoEnvio {
 	public Float cantidadQueDebeAbonar() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void enviar() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void cancelar() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void reprogramar() {
+		// TODO Auto-generated method stub
+
 	}
 
 }

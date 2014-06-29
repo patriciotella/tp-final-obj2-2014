@@ -6,16 +6,19 @@ public class Cancelado extends EstadoEnvio {
 		super(unaEntrega);
 		this.getEntregaADomicilio().cancelarCompraDeArticulos();
 	}
+	
 	@Override
-	public boolean debeAbonarAlgoEnEntrega() {
-		// TODO Auto-generated method stub
-		return false;
+	public void enviar() throws EnvioCanceladoException {
+		throw new EnvioCanceladoException("El envio fue cancelado.");
 	}
-
+	
 	@Override
-	public Float cantidadQueDebeAbonar() {
-		// TODO Auto-generated method stub
-		return null;
+	public void cancelar() throws EnvioCanceladoException {
+		throw new EnvioCanceladoException("El envio ya esta cancelado.");
+	}
+	@Override
+	public void reprogramar() throws EnvioCanceladoException {
+		throw new EnvioCanceladoException("El envio fue cancelado.");
 	}
 
 }

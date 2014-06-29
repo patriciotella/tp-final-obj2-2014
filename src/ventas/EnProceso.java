@@ -1,26 +1,43 @@
 package ventas;
 
 public class EnProceso extends EstadoEnvio {
-	
+
 	private float cantidadQueDebeAbonar;
-	
+
 	/**
-	 * Crea una instancia de EnProceso con el precio que debe abonar el cliente al
-	 * momento de la entrega.
+	 * Crea una instancia de EnProceso con el precio que debe abonar el cliente
+	 * al momento de la entrega.
+	 * 
 	 * @param cantidadQueDebeAbonarElCliente
 	 */
-	public EnProceso(EntregaADomicilio unaEntrega, Float cantidadQueDebeAbonarElCliente){
+	public EnProceso(EntregaADomicilio unaEntrega) {
 		super(unaEntrega);
-		cantidadQueDebeAbonar = cantidadQueDebeAbonarElCliente;
+		cantidadQueDebeAbonar = this.getEntregaADomicilio().getMontoQueDebeAbonar();
 	}
-	
-	public boolean debeAbonarAlgoEnEntrega(){
-		return (this.cantidadQueDebeAbonar()>0);
+
+	@Override
+	public boolean debeAbonarAlgoEnEntrega() {
+		return (this.cantidadQueDebeAbonar > 0f);
 	}
-	
-	public Float cantidadQueDebeAbonar(){
+
+	@Override
+	public Float cantidadQueDebeAbonar() {
 		return this.cantidadQueDebeAbonar;
 	}
 
+	@Override
+	public void enviar() throws Exception {
+		throw new Exception("El envio ya esta en proceso.");
+	}
+
+	@Override
+	public void cancelar() {
+		getEntregaADomicilio().setEstado(new Cancelado(getEntregaADomicilio()));
+	}
+
+	@Override
+	public void reprogramar() {
+		getEntregaADomicilio().setEstado(new Pendiente(getEntregaADomicilio()));
+	}
 
 }

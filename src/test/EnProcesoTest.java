@@ -1,7 +1,5 @@
 package test;
 
-
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -16,28 +14,35 @@ public class EnProcesoTest {
 	EnProceso ventaEnProcesoQueDebeAbonar;
 	EnProceso ventaEnProcesoQueNoDebeAbonar;
 	EntregaADomicilio unaEntrega;
-	
+	EntregaADomicilio entregaPaga;
+
 	@Before
 	public void setUp() {
 		unaEntrega = Mockito.mock(EntregaADomicilio.class);
-		ventaEnProcesoQueDebeAbonar = new EnProceso(unaEntrega, 25.5f);
-		ventaEnProcesoQueNoDebeAbonar = new EnProceso(unaEntrega, 0f);
+		Mockito.when(unaEntrega.getMontoQueDebeAbonar()).thenReturn(25.5f);
+		ventaEnProcesoQueDebeAbonar = new EnProceso(unaEntrega);
+
+		entregaPaga = Mockito.mock(EntregaADomicilio.class);
+		Mockito.when(unaEntrega.getMontoQueDebeAbonar()).thenReturn(0f);
+		ventaEnProcesoQueNoDebeAbonar = new EnProceso(entregaPaga);
 	}
+
 	@Test
 	public void testDebeAbonarAlgoEnEntrega() {
 		assertTrue(ventaEnProcesoQueDebeAbonar.debeAbonarAlgoEnEntrega());
 	}
-	
+
 	@Test
 	public void testDebeAbonarAlgoEnEntregaFalse() {
 		assertFalse(ventaEnProcesoQueNoDebeAbonar.debeAbonarAlgoEnEntrega());
 	}
-	
+
 	@Test
 	public void testCantidadQueDebeAbonarEnEntrega() {
-		assertEquals(ventaEnProcesoQueDebeAbonar.cantidadQueDebeAbonar(), 25.5d, 0d);
-		assertEquals(ventaEnProcesoQueNoDebeAbonar.cantidadQueDebeAbonar(), 0d, 0d);
+		assertEquals(ventaEnProcesoQueDebeAbonar.cantidadQueDebeAbonar(),
+				25.5f, 0f);
+		assertEquals(ventaEnProcesoQueNoDebeAbonar.cantidadQueDebeAbonar(), 0f,
+				0f);
 	}
-	
 
 }

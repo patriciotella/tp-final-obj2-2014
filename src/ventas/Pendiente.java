@@ -7,15 +7,19 @@ public class Pendiente extends EstadoEnvio {
 	}
 
 	@Override
-	public boolean debeAbonarAlgoEnEntrega() {
-		// TODO Auto-generated method stub
-		return false;
+	public void enviar() {
+		getEntregaADomicilio().setEstado(
+				new EnProceso(getEntregaADomicilio()));
 	}
 
 	@Override
-	public Float cantidadQueDebeAbonar() {
-		// TODO Auto-generated method stub
-		return null;
+	public void cancelar() {
+		getEntregaADomicilio().setEstado(new Cancelado(getEntregaADomicilio()));
+	}
+
+	@Override
+	public void reprogramar() throws Exception {
+		throw new Exception("La entrega aun esta pendiente.");
 	}
 
 }
