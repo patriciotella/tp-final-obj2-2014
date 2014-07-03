@@ -3,6 +3,7 @@ package sistema;
 import java.util.LinkedList;
 import java.util.List;
 
+import productos.Articulo;
 import productos.Presentacion;
 import productos.Stock;
 import productos.Ubicacion;
@@ -15,7 +16,8 @@ import ventas.Venta;
 public class Tienda {
 
 	private List<Stock> stock;
-	private List<Venta> ventas;// Lo mismo con las ventas, para devolución y
+	private List<Venta> ventas;// Lo mismo con las ventas, para devoluciï¿½n y
+	private ConfiguracionDeDevolucionDeDinero formaDevolucionDeDinero;
 								// cambio hay
 								// que buscar la venta y cancelarla.
 	/**
@@ -53,7 +55,7 @@ public class Tienda {
 	}
 
 	/**
-	 * Retorna una lista con los stocks de los artículos de la tienda.
+	 * Retorna una lista con los stocks de los artï¿½culos de la tienda.
 	 * @return List<Stock>
 	 */
 	public List<Stock> getStock() {
@@ -61,7 +63,7 @@ public class Tienda {
 	}
 
 	/**
-	 * Retorna las presentaciones que tienen stock mínimo.
+	 * Retorna las presentaciones que tienen stock mï¿½nimo.
 	 * @return List<Stock>
 	 */
 	public List<Stock> getPresentacionesConStockMinimo() {
@@ -74,7 +76,7 @@ public class Tienda {
 	}
 
 	/**
-	 * Retorna las presentaciones que tienen stock crítico.
+	 * Retorna las presentaciones que tienen stock crï¿½tico.
 	 * @return List<Stock>
 	 */
 	public List<Stock> getPresentacionesConStockCritico() {
@@ -86,7 +88,7 @@ public class Tienda {
 		return stocksCriticos;
 	}
 
-	//A PARTIR DE ACÁ HAY UN PAR REPETIDAS Y NO SÉ POR QUÉ.
+	//A PARTIR DE ACï¿½ HAY UN PAR REPETIDAS Y NO Sï¿½ POR QUï¿½.
 	public List<Venta> ventasRealizadas() {
 		return this.ventas;
 	}
@@ -130,7 +132,7 @@ public class Tienda {
 	}
 
 	/**
-	 * Ubica una presentación en la tienda (en un pasillo y un estante).
+	 * Ubica una presentaciï¿½n en la tienda (en un pasillo y un estante).
 	 * @param unaPresentacion
 	 * @param unaUbicacion
 	 * @throws PresentacionNotFoundException
@@ -142,7 +144,7 @@ public class Tienda {
 	}
 
 	/**
-	 * Busca y retorna la presentación en la tienda, si no la encuentra
+	 * Busca y retorna la presentaciï¿½n en la tienda, si no la encuentra
 	 * levanta una PresentacionNotFoundException.
 	 * @param unaPresentacion
 	 * @return
@@ -174,4 +176,16 @@ public class Tienda {
 		return gananciaTotal;
 	}
 	
+	public void devolver(Venta unaVenta) throws VentaNoEncontradaException {
+		if(this.ventas.contains(unaVenta)){
+			unaVenta.cancelarCompraDeArticulos();
+			this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta);
+			this.ventas.remove(unaVenta);
+		}else
+			throw new VentaNoEncontradaException();
+	}
+	
+	public void cambiarArticulo(Articulo unArticulo, Venta unaVenta) {
+		//TODO
+	}
 }
