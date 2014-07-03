@@ -95,4 +95,9 @@ public abstract class Venta {
 	public boolean incluyeArticulo(Articulo unArticulo) {
 		return this.articulos.contains(unArticulo);
 	}
+	
+	public void cancelarCompraDeArticulos() {
+		for(Articulo articulo : this.getDetalle())
+			articulo.cancelarCompraDeArticulo();
+	}
 }

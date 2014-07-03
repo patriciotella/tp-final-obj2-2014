@@ -28,11 +28,6 @@ public class EntregaADomicilio extends Venta {
 	public LocalDate getFechaCreacion(){
 		return fecha;
 	}
-
-	public void cancelarCompraDeArticulos() {
-		for(Articulo articulo : this.getDetalle())
-			articulo.cancelarCompraDeArticulo();
-	}
 	
 	public void enviar() throws Exception {
 		this.estado.enviar();
