@@ -239,4 +239,9 @@ public class Presentacion implements Articulo {
 	public void cancelarCompraDeArticulo() {
 		this.stock.sumarCantidad(1);
 	}
+
+	@Override
+	public float getGanancia() {
+		return this.precioUnitarioVenta-this.precioUnitarioCompra;
+	}
 }

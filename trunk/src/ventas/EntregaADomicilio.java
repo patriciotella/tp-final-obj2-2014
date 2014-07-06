@@ -33,7 +33,7 @@ public class EntregaADomicilio extends Venta {
 		this.estado.enviar();
 	}
 	
-	public void cancelarEnvio() throws EnvioCanceladoException {
+	public void cancelarEnvio() throws EnvioCanceladoException, EntregaPagaException {
 		this.estado.cancelar();
 	}
 	
@@ -43,5 +43,10 @@ public class EntregaADomicilio extends Venta {
 	
 	public Float getMontoQueDebeAbonar() {
 		return this.montoAPagar;
+	}
+	
+	@Override
+	public float getGanancia() {
+		return this.estado.getGananciaDeVenta();
 	}
 }

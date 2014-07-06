@@ -27,7 +27,7 @@ public class EnProceso extends EstadoEnvio {
 
 	@Override
 	public void enviar() throws Exception {
-		throw new Exception("El envio ya esta en proceso.");
+		throw new EnvioEnProcesoException("El envio ya esta en proceso.");
 	}
 
 	@Override

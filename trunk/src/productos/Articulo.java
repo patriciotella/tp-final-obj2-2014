@@ -17,7 +17,9 @@ public interface Articulo {
 	 */
 	public float getPrecioCompra();
 
-	public void descontarStockDeVenta();
+	public float getGanancia();
+	
+	public void descontarStockDeVenta() throws ArticuloSinStockException;
 
 	public void cancelarCompraDeArticulo();
 	
