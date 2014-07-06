@@ -16,8 +16,8 @@ import ventas.Venta;
 public class SistemaVentas extends Observable {
 	
 	private List<Tienda> sucursales;
-	private List<Cliente> clientes;
-	private List<Oferta> ofertas;
+	private List<Cliente> clientes; //Creo que no hace falta ponerla porque es 
+	private List<Oferta> ofertas;   // un observer.
 	
 	/**
 	 * Agrega una oferta a la lista de ofertas.

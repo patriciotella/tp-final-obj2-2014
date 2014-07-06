@@ -2,7 +2,7 @@ package ventas;
 
 public class Pendiente extends EstadoEnvio {
 
-	protected Pendiente(EntregaADomicilio unEnvio) {
+	public Pendiente(EntregaADomicilio unEnvio) {
 		super(unEnvio);
 	}
 

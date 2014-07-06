@@ -36,13 +36,7 @@ public abstract class Venta {
 			for(Articulo articulo : unaListaDeArticulos)
 				articulo.descontarStockDeVenta();
 		}catch (ArticuloSinStockException e){
-			/*Crear envio que observe el stock de los articulos que faltan,
-			cuando esten disponibles, el estado pasa a en proceso y se manda al
-			cliente.
-			Puedo hacer un if, si puede descontar stock de todos los articulos,
-			lo hace y la venta se hace normalmente, si no, hace lo del envio.
-			No haría falta usar el try/catch y ver hasta que articulo fue descon-
-			tado, etc.*/
+			System.out.println("Compra imposible de realizar por falta de stock");
 		}
 	}
 
@@ -110,4 +104,12 @@ public abstract class Venta {
 		for(Articulo articulo : this.getDetalle())
 			articulo.cancelarCompraDeArticulo();
 	}
+	
+	/*public void setFecha(LocalDate unaFecha) {
+		this.fecha = unaFecha;
+	}
+	
+	public void setCliente(Cliente unCliente) {
+		this.cliente = unCliente;
+	}*/
 }

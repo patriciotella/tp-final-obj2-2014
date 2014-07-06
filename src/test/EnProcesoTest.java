@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 
 import ventas.EnProceso;
 import ventas.EntregaADomicilio;
+import ventas.EnvioEnProcesoException;
 
 public class EnProcesoTest {
 
@@ -23,7 +24,7 @@ public class EnProcesoTest {
 		ventaEnProcesoQueDebeAbonar = new EnProceso(unaEntrega);
 
 		entregaPaga = Mockito.mock(EntregaADomicilio.class);
-		Mockito.when(unaEntrega.getMontoQueDebeAbonar()).thenReturn(0f);
+		Mockito.when(entregaPaga.getMontoQueDebeAbonar()).thenReturn(0f);
 		ventaEnProcesoQueNoDebeAbonar = new EnProceso(entregaPaga);
 	}
 
@@ -43,6 +44,12 @@ public class EnProcesoTest {
 				25.5f, 0f);
 		assertEquals(ventaEnProcesoQueNoDebeAbonar.cantidadQueDebeAbonar(), 0f,
 				0f);
+	}
+
+	@Test(expected = EnvioEnProcesoException.class)
+	public void testEnviar() throws EnvioEnProcesoException {
+		ventaEnProcesoQueDebeAbonar.enviar();
+		ventaEnProcesoQueNoDebeAbonar.enviar();
 	}
 
 }

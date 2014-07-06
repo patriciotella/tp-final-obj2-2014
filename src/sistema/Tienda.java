@@ -10,36 +10,37 @@ import productos.Ubicacion;
 import ventas.Venta;
 
 /**
- * Clase que representa una sucursal dentro de nuestro sistema de ventas.
- * Cuenta con una lista del Stock y otra de las Ventas realizadas dentro de la Tienda.
+ * Clase que representa una sucursal dentro de nuestro sistema de ventas. Cuenta
+ * con una lista del Stock y otra de las Ventas realizadas dentro de la Tienda.
  */
 public class Tienda {
 
 	private List<Stock> stock;
-	private List<Venta> ventas;// Lo mismo con las ventas, para devoluci�n y
+	private List<Venta> ventas;
 	private ConfiguracionDeDevolucionDeDinero formaDevolucionDeDinero;
-								// cambio hay
-								// que buscar la venta y cancelarla.
+
 	/**
 	 * Constructor de Clase Tienda
+	 * 
 	 * @param stk
 	 * @param vta
 	 */
-	public Tienda(List<Stock> stk, List<Venta> vta){
-		this.stock=stk;
-		this.ventas=vta;
+	public Tienda(List<Stock> stk, List<Venta> vta) {
+		this.stock = stk;
+		this.ventas = vta;
 	}
-	
+
 	/**
 	 * Crea una instancia de Tienda, sin ventas ni stock.
 	 */
-	public Tienda(){
+	public Tienda() {
 		this.stock = new LinkedList<Stock>();
 		this.ventas = new LinkedList<Venta>();
 	}
-	
+
 	/**
 	 * Registra una venta realizada en la tienda.
+	 * 
 	 * @param unaVenta
 	 */
 	public void registrarVenta(Venta unaVenta) {
@@ -48,6 +49,7 @@ public class Tienda {
 
 	/**
 	 * Retorna las ventas realizadas en la tienda.
+	 * 
 	 * @return List<Venta>
 	 */
 	public List<Venta> getVentasRealizadas() {
@@ -56,6 +58,7 @@ public class Tienda {
 
 	/**
 	 * Retorna una lista con los stocks de los art�culos de la tienda.
+	 * 
 	 * @return List<Stock>
 	 */
 	public List<Stock> getStock() {
@@ -64,6 +67,7 @@ public class Tienda {
 
 	/**
 	 * Retorna las presentaciones que tienen stock m�nimo.
+	 * 
 	 * @return List<Stock>
 	 */
 	public List<Stock> getPresentacionesConStockMinimo() {
@@ -77,6 +81,7 @@ public class Tienda {
 
 	/**
 	 * Retorna las presentaciones que tienen stock cr�tico.
+	 * 
 	 * @return List<Stock>
 	 */
 	public List<Stock> getPresentacionesConStockCritico() {
@@ -88,37 +93,9 @@ public class Tienda {
 		return stocksCriticos;
 	}
 
-	//A PARTIR DE AC� HAY UN PAR REPETIDAS Y NO S� POR QU�.
-	public List<Venta> ventasRealizadas() {
-		return this.ventas;
-	}
-
-	public List<Presentacion> presentacionesConStockMinimo() {
-
-		List<Presentacion> retorno = new LinkedList<Presentacion>();
-
-		for (Stock stock : this.stock) {
-			if (stock.esStockMinimo())
-				retorno.add(stock.getPresentacion());
-		}
-
-		return retorno;
-	}
-
-	public List<Presentacion> presentacionesConStockCritico() {
-
-		List<Presentacion> retorno = new LinkedList<Presentacion>();
-
-		for (Stock stock : this.stock) {
-			if (stock.esStockCritico())
-				retorno.add(stock.getPresentacion());
-		}
-
-		return retorno;
-	}
-
 	/**
 	 * Retorna la cantidad de plata que lleva gastada un cliente en la tienda.
+	 * 
 	 * @param unCliente
 	 * @return float
 	 */
@@ -133,6 +110,7 @@ public class Tienda {
 
 	/**
 	 * Ubica una presentaci�n en la tienda (en un pasillo y un estante).
+	 * 
 	 * @param unaPresentacion
 	 * @param unaUbicacion
 	 * @throws PresentacionNotFoundException
@@ -144,8 +122,9 @@ public class Tienda {
 	}
 
 	/**
-	 * Busca y retorna la presentaci�n en la tienda, si no la encuentra
-	 * levanta una PresentacionNotFoundException.
+	 * Busca y retorna la presentaci�n en la tienda, si no la encuentra levanta
+	 * una PresentacionNotFoundException.
+	 * 
 	 * @param unaPresentacion
 	 * @return
 	 * @throws PresentacionNotFoundException
@@ -159,33 +138,92 @@ public class Tienda {
 		throw new PresentacionNotFoundException(
 				"No se encontro la presentacion en la tienda");
 	}
-	
-	public void cambiar(Presentacion unaPresentacion, Venta unaVenta) {
-		
-		
-	}
-	
+
 	/**
 	 * Retorna la ganancia que tiene la tienda.
+	 * 
 	 * @return float
 	 */
-	public float getGanancia(){
+	public float getGanancia() {
 		float gananciaTotal = 0f;
-		for(Venta venta : this.ventas)
+		for (Venta venta : this.ventas)
 			gananciaTotal += venta.getGanancia();
 		return gananciaTotal;
 	}
-	
+
+	/**
+	 * Se devuelve la venta entera, esto quiere decir, los articulos vuelven a
+	 * estar en stock, la venta queda cancelada (se borra) y se devuelve parcial
+	 * o totalmente el dinero al cliente, dependiendo de cómo esté configurado.
+	 * 
+	 * @param unaVenta
+	 *            Si la venta no fue realizada en la tienda:
+	 * @throws VentaNoEncontradaException
+	 */
 	public void devolver(Venta unaVenta) throws VentaNoEncontradaException {
-		if(this.ventas.contains(unaVenta)){
+		if (this.ventas.contains(unaVenta)) {
 			unaVenta.cancelarCompraDeArticulos();
 			this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta);
 			this.ventas.remove(unaVenta);
-		}else
+		} else
 			throw new VentaNoEncontradaException();
 	}
-	
+
+	/**
+	 * En el caso de los cambios, el cliente entrega un producto comprado y
+	 * lleva otro abonando la diferencia,o si el saldo es a su favor, se le
+	 * genera una nota de crédito o se devuelve la diferencia al cliente. El 
+	 * artículo que cambia vuelve a estar en stock.
+	 * La acción a tomar es responsabilidad del vendedor (depende de la configura-
+	 * ción de devolución de dinero.
+	 * @param unArticulo
+	 * @param unaVenta
+	 */
 	public void cambiarArticulo(Articulo unArticulo, Venta unaVenta) {
-		//TODO
+		// TODO
+	}
+
+	/**
+	 * Setea la forma en que se devuelve al cliente el dinero en un cambio o en
+	 * una devolución.
+	 * @param unaConfiguracion
+	 */
+	public void setConfiguracionDeDevolucionDeDinero(
+			ConfiguracionDeDevolucionDeDinero unaConfiguracion) {
+		this.formaDevolucionDeDinero = unaConfiguracion;
+	}
+
+	/**
+	 * Retorna true si hay stock suficiente en la tienda para realizar la venta
+	 * de una presentación. Quiere decir, si la cantidad disponible en la tienda
+	 * alcanza para satisfacer la compra.
+	 * @param unaPresentacion
+	 * @param cantidadDeUnidadesDeLaPresentacion
+	 * @return boolean
+	 * @throws PresentacionNotFoundException
+	 */
+	public boolean hayStockSuficienteParaRealizarVentaDe(
+			Presentacion unaPresentacion, int cantidadDeUnidadesDeLaPresentacion)
+			throws PresentacionNotFoundException {
+		return buscarStockDePresentacion(unaPresentacion)
+				.hayStockSuficienteParaRealizarVenta(
+						cantidadDeUnidadesDeLaPresentacion);
+	}
+
+	/**
+	 * Busca el stock de una presentación en la tienda, si no lo encuentra
+	 * levanta una exception.
+	 * @param unaPresentacion
+	 * @return stock
+	 * @throws PresentacionNotFoundException
+	 */
+	private Stock buscarStockDePresentacion(Presentacion unaPresentacion)
+			throws PresentacionNotFoundException {
+		for (Stock stock : this.stock) {
+			if (stock.esStockDePresentacion(unaPresentacion))
+				return stock;
+		}
+		throw new PresentacionNotFoundException(
+				"No se encontro el stock de la presentacion.");
 	}
 }

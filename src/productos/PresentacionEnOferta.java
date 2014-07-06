@@ -41,7 +41,7 @@ public class PresentacionEnOferta extends Oferta {
 
 
 	@Override
-	public void descontarStockDeVenta() {
+	public void descontarStockDeVenta() throws ArticuloSinStockException {
 		this.presentacion.descontarStockDeVenta();
 	}
 
