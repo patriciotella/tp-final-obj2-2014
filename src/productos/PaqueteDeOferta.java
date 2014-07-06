@@ -52,7 +52,7 @@ public class PaqueteDeOferta extends Oferta {
 	}
 
 	@Override
-	public void descontarStockDeVenta() {
+	public void descontarStockDeVenta() throws ArticuloSinStockException {
 		for(Articulo articulo : this.articulos)
 			articulo.descontarStockDeVenta();
 	}
@@ -61,5 +61,13 @@ public class PaqueteDeOferta extends Oferta {
 	public void cancelarCompraDeArticulo() {
 		for(Articulo articulo : this.articulos)
 			articulo.cancelarCompraDeArticulo();
+	}
+
+	@Override
+	public float getGanancia() {
+		float ganancia = 0f;
+		for(Articulo articulo : this.articulos)
+			ganancia += articulo.getGanancia();
+		return ganancia;
 	}
 }

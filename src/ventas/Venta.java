@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.LocalDate;
 
 import productos.Articulo;
+import productos.ArticuloSinStockException;
 import sistema.Cliente;
 
 public abstract class Venta {
@@ -31,8 +32,17 @@ public abstract class Venta {
 	 * @param unaListaDeArticulos
 	 */
 	private void descontarStockDeVenta(List<Articulo> unaListaDeArticulos) {
-		for(Articulo articulo : unaListaDeArticulos){
-			articulo.descontarStockDeVenta();
+		try{
+			for(Articulo articulo : unaListaDeArticulos)
+				articulo.descontarStockDeVenta();
+		}catch (ArticuloSinStockException e){
+			/*Crear envio que observe el stock de los articulos que faltan,
+			cuando esten disponibles, el estado pasa a en proceso y se manda al
+			cliente.
+			Puedo hacer un if, si puede descontar stock de todos los articulos,
+			lo hace y la venta se hace normalmente, si no, hace lo del envio.
+			No haría falta usar el try/catch y ver hasta que articulo fue descon-
+			tado, etc.*/
 		}
 	}
 
@@ -56,7 +66,7 @@ public abstract class Venta {
 	public float getGanancia(){
 		Float montoFinal = 0f;
 		for(Articulo articulo : articulos)
-			montoFinal += (articulo.getPrecio()-articulo.getPrecioCompra());
+			montoFinal += articulo.getGanancia();
 		return montoFinal;
 	}
 	/**

@@ -51,4 +51,10 @@ public class PresentacionEnOferta extends Oferta {
 		this.presentacion.cancelarCompraDeArticulo();
 	}
 
+
+	@Override
+	public float getGanancia() {
+		return this.presentacion.getGanancia();
+	}
+
 }

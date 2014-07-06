@@ -32,8 +32,12 @@ public abstract class EstadoEnvio {
 
 	public abstract void enviar() throws EnvioCanceladoException, Exception;
 
-	public abstract void cancelar() throws EnvioCanceladoException;
+	public abstract void cancelar() throws EnvioCanceladoException, EntregaPagaException;
 
 	public abstract void reprogramar() throws EnvioCanceladoException, Exception;
+
+	public float getGananciaDeVenta() {
+		return 0;
+	}
 	
 }
