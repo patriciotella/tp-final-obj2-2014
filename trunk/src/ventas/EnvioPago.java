@@ -9,17 +9,17 @@ public class EnvioPago extends EstadoEnvio {
 	}
 
 	@Override
-	public void enviar() throws EnvioCanceladoException, Exception {
+	public void enviar() throws EntregaPagaException {
 		throw new EntregaPagaException("El envio ya fue pagado por el cliente");
 	}
 
 	@Override
-	public void cancelar() throws EnvioCanceladoException, EntregaPagaException {
+	public void cancelar() throws EntregaPagaException {
 		throw new EntregaPagaException("El envio ya fue pagado por el cliente");
 	}
 
 	@Override
-	public void reprogramar() throws EnvioCanceladoException, Exception {
+	public void reprogramar() throws EntregaPagaException {
 		throw new EntregaPagaException("El envio ya fue pagado por el cliente");
 	}
 	
