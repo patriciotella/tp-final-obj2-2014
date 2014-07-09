@@ -21,7 +21,7 @@ public class CuentaCorriente {
 		return movimientos;
 	}
 
-	public double getSaldo() {
+	public float getSaldo() {
 		return this.saldo;
 	}
 
