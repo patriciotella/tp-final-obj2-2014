@@ -54,7 +54,7 @@ public class VentaConCtaCteTest {
 		Mockito.verify(controlRemoto).descontarStockDeVenta(1);
 	}
 	
-	@Test
+	@Test(expected = NoTieneSaldoSuficienteParaRealizarOperacionException.class)
 	public void testNoTieneSaldoParaRealizarLaCompra()
 			throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		Mockito.when(auricular.getPrecio()).thenReturn(20f);
@@ -68,7 +68,7 @@ public class VentaConCtaCteTest {
 	}
 	
 	@Test
-	public void testGetGanancia() {
+	public void testGetGanancia() throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		Mockito.when(auricular.getGanancia()).thenReturn(5f);
 		Mockito.when(controlRemoto.getGanancia()).thenReturn(6.5f);
 		Mockito.when(cliente.getCuentaCorriente()).thenReturn(cuentaDelCliente);
@@ -77,41 +77,42 @@ public class VentaConCtaCteTest {
 	}
 	
 	@Test
-	public void testGetCliente() {
+	public void testGetCliente() throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		venta = new VentaConCtaCte(articulos, cliente, fecha);
 		assertEquals(venta.getCliente(), cliente);
 	}
 	
 	@Test
-	public void testGetFecha() {
+	public void testGetFecha() throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		venta = new VentaConCtaCte(articulos, cliente, fecha);
 		assertEquals(venta.getFecha(), fecha);
 	}
 	
 	@Test
-	public void testGetDetalle() {
+	public void testGetDetalle() throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		venta = new VentaConCtaCte(articulos, cliente, fecha);
 		assertEquals(venta.getDetalle(), articulos);
 	}
 	
 	@Test
-	public void testFueCompradoPor() {
+	public void testFueCompradoPor() throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		venta = new VentaConCtaCte(articulos, cliente, fecha);
 		assertTrue(venta.fueCompradaPor(cliente));
 	}
 	
 	@Test
-	public void testIncluyeArticulo() {
+	public void testIncluyeArticulo() throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		venta = new VentaConCtaCte(articulos, cliente, fecha);
 		assertTrue(venta.incluyeArticulo(auricular));
 		assertTrue(venta.incluyeArticulo(controlRemoto));
 	}
 	
 	@Test
-	public void testCancelarCompraDeArticulos() {
+	public void testCancelarCompraDeArticulos() throws NoTieneSaldoSuficienteParaRealizarOperacionException {
 		venta = new VentaConCtaCte(articulos, cliente, fecha);
 		venta.cancelarCompraDeArticulos();
 		Mockito.verify(auricular).cancelarCompraDeArticulo();
 		Mockito.verify(controlRemoto).cancelarCompraDeArticulo();
 	}
+
 }

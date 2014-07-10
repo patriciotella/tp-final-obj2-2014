@@ -30,6 +30,17 @@ public class Pedido extends Observable implements Observer {
 		this.verificarDisponibilidadDeStock();
 	}
 
+	/**
+	 * Verifica si hay stock suficiente de cada artículo para satisfacer el
+	 * pedido. Puede ser que la presentación no esté en al tienda, esto quiere
+	 * decir que no existe el stock y levanta la exception. Si hay stock
+	 * suficiente, lo descuenta para "reservarlo". Si no, se agrega como
+	 * observer, observando al stock que todavía no tiene la cantidad suficiente
+	 * y lo agrega a la lista donde estan todos los stocks insuficientes.
+	 * Puede ser que haya stock de todos los artículos, en ese caso, se notifica
+	 * al cliente.
+	 * @throws PresentacionNotFoundException
+	 */
 	private void verificarDisponibilidadDeStock()
 			throws PresentacionNotFoundException {
 		boolean puedeNotificarAlCliente = true;
@@ -43,7 +54,8 @@ public class Pedido extends Observable implements Observer {
 				this.stockInsuficienteDeArticulos.add(stock);
 				puedeNotificarAlCliente = false;
 			} else {
-				stockDePresentacion.descontarVentaDeArticulo(stock.getCantidad());
+				stockDePresentacion.descontarVentaDeArticulo(stock
+						.getCantidad());
 			}
 		}
 		if (puedeNotificarAlCliente)
@@ -55,6 +67,11 @@ public class Pedido extends Observable implements Observer {
 		notifyObservers(unMensaje);
 	}
 
+	/**
+	 * Notifica al cliente si el pedido ya está listo para ser entregado.
+	 * Esto quiere decir, si ya estan todos los artículos con sus respectivas
+	 * cantidades disponibles.
+	 */
 	private void notificarAlClienteSiDebe() {
 		boolean puedeNotificarAlCliente = true;
 		for (Stock stock : this.stockInsuficienteDeArticulos) {
@@ -85,6 +102,10 @@ public class Pedido extends Observable implements Observer {
 		notificarAlClienteSiDebe();
 	}
 
+	/**
+	 * Retorna la fecha en que se creó el pedido.
+	 * @return LocalDate
+	 */
 	public LocalDate getFecha() {
 		return this.fecha;
 	}

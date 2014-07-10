@@ -130,6 +130,19 @@ public class PedidoTest {
 	}
 
 	@Test
+	public void testNotificarAlClienteSiDebeCatch()
+			throws PresentacionNotFoundException {
+		Mockito.when(tienda.hayStockSuficienteParaRealizarVentaDe(caramelo, 20))
+				.thenReturn(true);
+		Mockito.when(tienda.hayStockSuficienteParaRealizarVentaDe(enchufe, 10))
+				.thenReturn(false);
+		pedido = new Pedido(tienda, stocks, cliente, fecha);
+		Mockito.doThrow(PresentacionNotFoundException.class).when(tienda)
+				.hayStockSuficienteParaRealizarVentaDe(enchufe, 10);
+		pedido.update(stockDeEnchufes, null);
+	}
+
+	@Test
 	public void testGetFecha() throws PresentacionNotFoundException {
 		pedido = new Pedido(tienda, stocks, cliente, fecha);
 		assertEquals(pedido.getFecha(), fecha);
