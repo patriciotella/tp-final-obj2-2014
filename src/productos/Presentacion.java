@@ -227,8 +227,8 @@ public class Presentacion implements Articulo {
 	}
 
 	@Override
-	public void descontarStockDeVenta() throws ArticuloSinStockException {
-		this.stock.restarCantidad(1);
+	public void descontarStockDeVenta(int unaCantidadDeArticulos) throws ArticuloSinStockException {
+		this.stock.restarCantidad(unaCantidadDeArticulos);
 	}
 	
 	public void setStock(Stock unStock) {

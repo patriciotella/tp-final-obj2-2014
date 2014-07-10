@@ -25,10 +25,7 @@ public class EnvioPago extends EstadoEnvio {
 	
 	@Override
 	public float getGananciaDeVenta() {
-		float ganancia = 0f;
-		for(Articulo articulo : this.getEntregaADomicilio().getDetalle())
-			ganancia += articulo.getGanancia();
-		return ganancia;
+		return this.getEntregaADomicilio().getGanancia();
 	}
 
 }

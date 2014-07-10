@@ -34,7 +34,7 @@ public abstract class Venta {
 	private void descontarStockDeVenta(List<Articulo> unaListaDeArticulos) {
 		try{
 			for(Articulo articulo : unaListaDeArticulos)
-				articulo.descontarStockDeVenta();
+				articulo.descontarStockDeVenta(1);
 		}catch (ArticuloSinStockException e){
 			System.out.println("Compra imposible de realizar por falta de stock");
 		}
