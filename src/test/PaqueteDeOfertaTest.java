@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import productos.Articulo;
+import productos.ArticuloSinStockException;
 import productos.PaqueteDeOferta;
 import productos.Presentacion;
 import productos.PresentacionEnOferta;
@@ -77,5 +78,32 @@ public class PaqueteDeOfertaTest {
 		Mockito.verify(caramelo).getPrecioCompra();
 		Mockito.verify(chicle).getPrecioCompra();
 		Mockito.verify(tetra).getPrecioCompra();
+	}
+	
+	@Test
+	public void testDescontarStockDeVenta() throws ArticuloSinStockException {
+		unPaquete.descontarStockDeVenta(2);
+		Mockito.verify(caramelo).descontarStockDeVenta(2);
+		Mockito.verify(chicle).descontarStockDeVenta(2);
+		Mockito.verify(tetra).descontarStockDeVenta(2);
+	}
+	
+	@Test
+	public void testCancelarCompraDeArticulos() {
+		unPaquete.cancelarCompraDeArticulo();
+		Mockito.verify(caramelo).cancelarCompraDeArticulo();
+		Mockito.verify(chicle).cancelarCompraDeArticulo();
+		Mockito.verify(tetra).cancelarCompraDeArticulo();
+	}
+	
+	@Test
+	public void testGetGanancia() {
+		Mockito.when(caramelo.getGanancia()).thenReturn(0.2f);
+		Mockito.when(chicle.getGanancia()).thenReturn(0.5f);
+		Mockito.when(tetra.getGanancia()).thenReturn(10f);
+		assertEquals(unPaquete.getGanancia(), 10.7f, 0f);
+		Mockito.verify(caramelo).getGanancia();
+		Mockito.verify(chicle).getGanancia();
+		Mockito.verify(tetra).getGanancia();
 	}
 }

@@ -7,13 +7,11 @@ package productos;
 public class PresentacionEnOferta extends Oferta {
 
 	private Presentacion presentacion;
-	
-	public PresentacionEnOferta(Presentacion unaPresentacion,
-			float unDescuento) {
+
+	public PresentacionEnOferta(Presentacion unaPresentacion, float unDescuento) {
 		super(unDescuento);
 		this.presentacion = unaPresentacion;
 	}
-
 
 	/**
 	 * Retorna la presentacion dentro de la oferta.
@@ -24,14 +22,14 @@ public class PresentacionEnOferta extends Oferta {
 		return presentacion;
 	}
 
-	/*@Override
-	public float calcularPrecio() {
-		return this.presentacion.getPrecioUnitarioVenta() * getDescuento();
-	}*/
+	/*
+	 * @Override public float calcularPrecio() { return
+	 * this.presentacion.getPrecioUnitarioVenta() * getDescuento(); }
+	 */
 
 	@Override
 	public float getPrecio() {
-		return this.presentacion.getPrecio()/getDescuento();
+		return this.presentacion.getPrecio() / getDescuento();
 	}
 
 	@Override
@@ -39,18 +37,16 @@ public class PresentacionEnOferta extends Oferta {
 		return this.presentacion.getPrecioCompra();
 	}
 
-
 	@Override
-	public void descontarStockDeVenta(int unaCantidadDeArticulos) throws ArticuloSinStockException {
+	public void descontarStockDeVenta(int unaCantidadDeArticulos)
+			throws ArticuloSinStockException {
 		this.presentacion.descontarStockDeVenta(unaCantidadDeArticulos);
 	}
-
-
+	
 	@Override
 	public void cancelarCompraDeArticulo() {
 		this.presentacion.cancelarCompraDeArticulo();
 	}
-
 
 	@Override
 	public float getGanancia() {
