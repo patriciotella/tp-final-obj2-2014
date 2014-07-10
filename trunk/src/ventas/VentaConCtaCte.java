@@ -11,10 +11,13 @@ import sistema.NoTieneSaldoSuficienteParaRealizarOperacionException;
 public class VentaConCtaCte extends Venta {
 
 	public VentaConCtaCte(List<Articulo> unaListaDeArticulos,
-			Cliente unCliente, LocalDate unaFecha)
-			throws NoTieneSaldoSuficienteParaRealizarOperacionException {
+			Cliente unCliente, LocalDate unaFecha) {
 		super(unaListaDeArticulos, unCliente, unaFecha);
-		unCliente.getCuentaCorriente().descontarSaldo(this.getMonto());
+		try {
+			unCliente.getCuentaCorriente().descontarSaldo(this.getMonto());
+		} catch (NoTieneSaldoSuficienteParaRealizarOperacionException e) {
+			this.cancelarCompraDeArticulos();
+		}
 	}
 	
 }

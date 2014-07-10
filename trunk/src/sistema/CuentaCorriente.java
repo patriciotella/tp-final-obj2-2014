@@ -9,7 +9,7 @@ public class CuentaCorriente {
 	private List<String> movimientos;
 
 	// creo que faltaria que definamos un poco que son los movimientos
-	// plantearlo como una clase nueva, que toma una venta, fehca, monto,
+	// plantearlo como una clase nueva, que toma una venta, fecha, monto,
 	// los nombres de los productos de la venta y el importe total
 	// EL STRING ES MEDIO FLACO
 	public CuentaCorriente() {

@@ -41,14 +41,7 @@ public class EnvioPagoTest {
 	}
 	
 	public void testGetGananciaDeVenta() {
-		List<Articulo> articulos = new LinkedList<Articulo>();
-		Articulo articulo1 = Mockito.mock(Articulo.class);
-		Articulo articulo2 = Mockito.mock(Articulo.class);
-		articulos.add(articulo1);
-		articulos.add(articulo2);
-		Mockito.when(entrega.getDetalle()).thenReturn(articulos);
-		Mockito.when(articulo1.getGanancia()).thenReturn(20.5f);
-		Mockito.when(articulo2.getGanancia()).thenReturn(15f);
+		Mockito.when(entrega.getGanancia()).thenReturn(35.5f);
 		assertEquals(envioPago.getGananciaDeVenta(), 35.5f, 0f);
 	}
 

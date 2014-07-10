@@ -25,19 +25,22 @@ public abstract class EstadoEnvio {
 	public Float cantidadQueDebeAbonar() throws Exception {
 		throw new Exception("Solo el envio en proceso tiene este dato");
 	}
-	
+
 	protected EntregaADomicilio getEntregaADomicilio() {
 		return this.entrega;
 	}
 
-	public abstract void enviar() throws EnvioCanceladoException, Exception;
+	public abstract void enviar() throws EnvioCanceladoException,
+			EntregaPagaException, EnvioEnProcesoException;
 
-	public abstract void cancelar() throws EnvioCanceladoException, EntregaPagaException;
+	public abstract void cancelar() throws EnvioCanceladoException,
+			EntregaPagaException;
 
-	public abstract void reprogramar() throws EnvioCanceladoException, Exception;
+	public abstract void reprogramar() throws EnvioCanceladoException,
+			EntregaPagaException, Exception;
 
 	public float getGananciaDeVenta() {
 		return 0;
 	}
-	
+
 }

@@ -217,7 +217,7 @@ public class Tienda {
 	 * @return stock
 	 * @throws PresentacionNotFoundException
 	 */
-	private Stock buscarStockDePresentacion(Presentacion unaPresentacion)
+	public Stock buscarStockDePresentacion(Presentacion unaPresentacion)
 			throws PresentacionNotFoundException {
 		for (Stock stock : this.stock) {
 			if (stock.esStockDePresentacion(unaPresentacion))

@@ -67,6 +67,13 @@ public class StockTest {
 	}
 
 	@Test
+	public void testEsStockMinimoFalse() {
+		Mockito.when(unaPresentacion.getStockMinimo()).thenReturn(3);
+		assertFalse(unStock.esStockMinimo());
+		Mockito.verify(unaPresentacion).getStockMinimo();
+	}
+	
+	@Test
 	public void testEsStockCritico() throws ArticuloSinStockException {
 		Mockito.when(unaPresentacion.getStockCritico()).thenReturn(1);
 		unStock.restarCantidad(4);
@@ -74,6 +81,13 @@ public class StockTest {
 		Mockito.verify(unaPresentacion).getStockCritico();
 	}
 
+	@Test
+	public void testEsStockCriticoFalse() throws ArticuloSinStockException {
+		Mockito.when(unaPresentacion.getStockCritico()).thenReturn(2);
+		assertFalse(unStock.esStockCritico());
+		Mockito.verify(unaPresentacion).getStockCritico();
+	}
+	
 	@Test
 	public void testGetPresentacion() {
 		assertEquals(unStock.getPresentacion(), unaPresentacion);

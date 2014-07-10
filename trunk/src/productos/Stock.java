@@ -125,4 +125,11 @@ public class Stock extends Observable {
 		return this.cantidad - unaCantidad >= 0;
 	}
 
+	/**
+	 * Descuenta una cantidad del stock de articulos producto de una venta.
+	 * @param unaCantidadDeArticulosVendidos
+	 */
+	public void descontarVentaDeArticulo(int unaCantidadDeArticulosVendidos) {
+		this.cantidad -= unaCantidadDeArticulosVendidos;
+	}
 }
