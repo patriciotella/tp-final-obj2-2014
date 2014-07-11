@@ -18,6 +18,11 @@ public class SistemaVentas extends Observable {
 	private List<Tienda> sucursales;
 	private List<Oferta> ofertas;
 	
+	public SistemaVentas (List<Tienda> unaListaDeSucursales, List<Oferta> unaListaDeOfertas) {
+		this.sucursales = unaListaDeSucursales;
+		this.ofertas = unaListaDeOfertas;
+	}
+	
 	/**
 	 * Agrega una oferta a la lista de ofertas.
 	 * @param Oferta unaOferta
@@ -45,6 +50,10 @@ public class SistemaVentas extends Observable {
 		for(Tienda tienda : sucursales)
 			ventasDeTiendas.addAll(tienda.getVentasRealizadas());
 		return ventasDeTiendas;
+	}
+	
+	public List<Oferta> getOfertas() {
+		return this.ofertas;
 	}
 
 }
