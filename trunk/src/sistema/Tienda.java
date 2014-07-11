@@ -167,8 +167,8 @@ public class Tienda {
 	 */
 	public void devolver(Venta unaVenta) throws VentaNoEncontradaException {
 		if (this.ventas.contains(unaVenta)) {
+			this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta,unaVenta.getMonto());
 			unaVenta.cancelarCompraDeArticulos();
-			this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta);
 			this.ventas.remove(unaVenta);
 		} else
 			throw new VentaNoEncontradaException();
@@ -185,8 +185,21 @@ public class Tienda {
 	 * @param unArticulo
 	 * @param unaVenta
 	 */
-	public void cambiarArticulo(Articulo unArticulo, Venta unaVenta) {
-		// TODO
+	public void cambiarArticulo(Articulo articuloNuevo,Articulo articuloViejo, Venta unaVenta) {
+		//HAY QUE VER SI ESTA BIEN!!!
+		//LO QUE HICE FUE DAR LAS 2 OPCIONES Y LA FORMA DE DEVOLUCION QUE SE ENCARGUE.
+		//SI VALEN LO MISMO NO HACE NADA
+		float diferencia = articuloNuevo.getPrecio() - articuloViejo.getPrecio();
+		unaVenta.cancelarCompraDeArticulo(articuloViejo);
+		unaVenta.agregarArticuloALaCompra(articuloNuevo);
+		if (diferencia > 0){
+			this.formaDevolucionDeDinero.pagarlaDiferencia(unaVenta,diferencia);
+		}
+		else{
+			if(diferencia > 0){
+				this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta,diferencia);
+			}
+		}
 	}
 
 	/**
