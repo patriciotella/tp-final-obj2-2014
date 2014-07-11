@@ -16,8 +16,7 @@ import ventas.Venta;
 public class SistemaVentas extends Observable {
 	
 	private List<Tienda> sucursales;
-	private List<Cliente> clientes; //Creo que no hace falta ponerla porque es 
-	private List<Oferta> ofertas;   // un observer.
+	private List<Oferta> ofertas;
 	
 	/**
 	 * Agrega una oferta a la lista de ofertas.
@@ -47,15 +46,5 @@ public class SistemaVentas extends Observable {
 			ventasDeTiendas.addAll(tienda.getVentasRealizadas());
 		return ventasDeTiendas;
 	}
-	
-	/*
-	 ubicarProducto(Sucursal,Producto)
- +agregarOferta(Oferta)
-+ filtrarVentas(FiltroDeVentas): List<Venta>
-+ filtrarProductos(FiltroDeProductos): List<Presentacion>
-+ filtrarEnvios(FiltroDeEnvios): List<Envio>
-+ filtrarMontos(FiltroDeMonto): List<Integer>
-+ filtrarCuentaCorriente(FiltroDeCTACTE): List<CuentaCorriente>
-	 */
 
 }

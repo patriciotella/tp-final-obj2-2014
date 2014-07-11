@@ -58,6 +58,7 @@ public class Pedido extends Observable implements Observer {
 						.getCantidad());
 			}
 		}
+		this.tienda.agregarPedido(this);
 		if (puedeNotificarAlCliente)
 			notificar("Ya puede retirar su pedido");
 	}

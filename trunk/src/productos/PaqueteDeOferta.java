@@ -35,10 +35,10 @@ public class PaqueteDeOferta extends Oferta {
 	}
 
 	@Override
-	public float getPrecioCompra() {
+	public float getPrecioDeCompra() {
 		float precioCompra = 0f;
 		for (Articulo articulo : this.articulos)
-			precioCompra += articulo.getPrecioCompra();
+			precioCompra += articulo.getPrecioDeCompra();
 		return precioCompra;
 	}
 

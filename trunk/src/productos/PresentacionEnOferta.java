@@ -33,8 +33,8 @@ public class PresentacionEnOferta extends Oferta {
 	}
 
 	@Override
-	public float getPrecioCompra() {
-		return this.presentacion.getPrecioCompra();
+	public float getPrecioDeCompra() {
+		return this.presentacion.getPrecioDeCompra();
 	}
 
 	@Override

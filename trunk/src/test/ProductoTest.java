@@ -17,54 +17,67 @@ public class ProductoTest {
 	Producto unProducto;
 	List<Presentacion> unaListaDePresentaciones;
 	Presentacion unaPresentacion;
-	
+
 	@Before
-	public void setUp(){
+	public void setUp() {
 		unaListaDePresentaciones = new ArrayList<Presentacion>();
-		unProducto = new Producto("Yerba","unaDescripcion","Taragüi","unTipo",unaListaDePresentaciones);		
+		unProducto = new Producto("Yerba", "unaDescripcion", "Taragüi",
+				"unTipo", unaListaDePresentaciones);
 		unaPresentacion = Mockito.mock(Presentacion.class);
 	}
 
 	@Test
-	public void getNombreTest(){
-		assertEquals(unProducto.getNombre(),"Yerba");
+	public void testGetNombre() {
+		assertEquals(unProducto.getNombre(), "Yerba");
 	}
-	
+
 	@Test
-	public void getMarcaTest(){
-		assertEquals(unProducto.getMarca(),"Taragüi");
+	public void testGetMarca() {
+		assertEquals(unProducto.getMarca(), "Taragüi");
 	}
-	
+
 	@Test
-	public void getPresentacionesTest(){
+	public void testGetPresentaciones() {
 		assertTrue(unProducto.getPresentaciones().isEmpty());
 	}
-	
+
 	@Test
-	public void getDescripcionTest(){
-		assertEquals(unProducto.getDescripcion(),"unaDescripcion");
+	public void testGetDescripcion() {
+		assertEquals(unProducto.getDescripcion(), "unaDescripcion");
 	}
-	
+
 	@Test
-	public void getTipoTest(){
-		assertEquals(unProducto.getTipo(),"unTipo");
+	public void testGetTipo() {
+		assertEquals(unProducto.getTipo(), "unTipo");
 	}
-	
+
 	@Test
-	public void setNombreTest(){
+	public void testSetNombre() {
 		unProducto.setNombre("Fideos");
-		assertEquals(unProducto.getNombre(),"Fideos");
+		assertEquals(unProducto.getNombre(), "Fideos");
 	}
-	
+
 	@Test
-	public void setMarcaTest(){
+	public void testSetMarca() {
 		unProducto.setMarca("Rosamonte");
-		assertEquals(unProducto.getMarca(),"Rosamonte");
+		assertEquals(unProducto.getMarca(), "Rosamonte");
 	}
-	
+
 	@Test
-	public void setPresentacionTest(){
-		unProducto.setPresentacion(unaPresentacion);		
-		assertEquals(unProducto.getPresentaciones().size(),1);
+	public void testAgregarPresentacion() {
+		unProducto.agregarPresentacion(unaPresentacion);
+		assertEquals(unProducto.getPresentaciones().size(), 1);
+	}
+
+	@Test
+	public void testConstructorConListaDePresentacionesVacia() {
+		Producto azucar = new Producto("Azucar", "Una Descripcion", "Ledesma", "Un tipo");
+		assertEquals(azucar.getNombre(), "Azucar");
+		assertEquals(azucar.getDescripcion(), "Una Descripcion");
+		assertEquals(azucar.getMarca(), "Ledesma");
+		assertEquals(azucar.getTipo(), "Un tipo");
+		Presentacion azucarLedesma100gr = Mockito.mock(Presentacion.class); 
+		azucar.agregarPresentacion(azucarLedesma100gr);
+		assertTrue(azucar.getPresentaciones().contains(azucarLedesma100gr));
 	}
 }

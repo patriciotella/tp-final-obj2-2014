@@ -7,6 +7,7 @@ import productos.Articulo;
 import productos.Presentacion;
 import productos.Stock;
 import productos.Ubicacion;
+import ventas.Pedido;
 import ventas.Venta;
 
 /**
@@ -18,16 +19,18 @@ public class Tienda {
 	private List<Stock> stock;
 	private List<Venta> ventas;
 	private ConfiguracionDeDevolucionDeDinero formaDevolucionDeDinero;
+	private List<Pedido> pedidos;
 
 	/**
 	 * Constructor de Clase Tienda
 	 * 
-	 * @param stk
-	 * @param vta
+	 * @param stock
+	 * @param ventas
 	 */
-	public Tienda(List<Stock> stk, List<Venta> vta) {
-		this.stock = stk;
-		this.ventas = vta;
+	public Tienda(List<Stock> stock, List<Venta> ventas, List<Pedido> pedidos) {
+		this.stock = stock;
+		this.ventas = ventas;
+		this.pedidos = pedidos;
 	}
 
 	/**
@@ -36,6 +39,7 @@ public class Tienda {
 	public Tienda() {
 		this.stock = new LinkedList<Stock>();
 		this.ventas = new LinkedList<Venta>();
+		this.pedidos = new LinkedList<Pedido>();
 	}
 
 	/**
@@ -122,8 +126,8 @@ public class Tienda {
 	}
 
 	/**
-	 * Busca y retorna la presentaci�n en la tienda, si no la encuentra levanta
-	 * una PresentacionNotFoundException.
+	 * Busca y retorna la presentaci�n en la tienda, si no la encuentra
+	 * levanta una PresentacionNotFoundException.
 	 * 
 	 * @param unaPresentacion
 	 * @return
@@ -154,7 +158,8 @@ public class Tienda {
 	/**
 	 * Se devuelve la venta entera, esto quiere decir, los articulos vuelven a
 	 * estar en stock, la venta queda cancelada (se borra) y se devuelve parcial
-	 * o totalmente el dinero al cliente, dependiendo de cómo esté configurado.
+	 * o totalmente el dinero al cliente, dependiendo de cómo esté
+	 * configurado.
 	 * 
 	 * @param unaVenta
 	 *            Si la venta no fue realizada en la tienda:
@@ -172,10 +177,11 @@ public class Tienda {
 	/**
 	 * En el caso de los cambios, el cliente entrega un producto comprado y
 	 * lleva otro abonando la diferencia,o si el saldo es a su favor, se le
-	 * genera una nota de crédito o se devuelve la diferencia al cliente. El 
-	 * artículo que cambia vuelve a estar en stock.
-	 * La acción a tomar es responsabilidad del vendedor (depende de la configura-
-	 * ción de devolución de dinero.
+	 * genera una nota de crédito o se devuelve la diferencia al cliente. El
+	 * artículo que cambia vuelve a estar en stock. La acción a tomar es
+	 * responsabilidad del vendedor (depende de la configura- ción de
+	 * devolución de dinero.
+	 * 
 	 * @param unArticulo
 	 * @param unaVenta
 	 */
@@ -186,6 +192,7 @@ public class Tienda {
 	/**
 	 * Setea la forma en que se devuelve al cliente el dinero en un cambio o en
 	 * una devolución.
+	 * 
 	 * @param unaConfiguracion
 	 */
 	public void setConfiguracionDeDevolucionDeDinero(
@@ -195,8 +202,9 @@ public class Tienda {
 
 	/**
 	 * Retorna true si hay stock suficiente en la tienda para realizar la venta
-	 * de una presentación. Quiere decir, si la cantidad disponible en la tienda
-	 * alcanza para satisfacer la compra.
+	 * de una presentación. Quiere decir, si la cantidad disponible en la
+	 * tienda alcanza para satisfacer la compra.
+	 * 
 	 * @param unaPresentacion
 	 * @param cantidadDeUnidadesDeLaPresentacion
 	 * @return boolean
@@ -213,6 +221,7 @@ public class Tienda {
 	/**
 	 * Busca el stock de una presentación en la tienda, si no lo encuentra
 	 * levanta una exception.
+	 * 
 	 * @param unaPresentacion
 	 * @return stock
 	 * @throws PresentacionNotFoundException
@@ -225,5 +234,27 @@ public class Tienda {
 		}
 		throw new PresentacionNotFoundException(
 				"No se encontro el stock de la presentacion.");
+	}
+	
+	/**
+	 * Retorna la lista de pedidos.
+	 * @return
+	 */
+	public List<Pedido> getPedidos() {
+		return this.pedidos;
+	}
+	
+	/**
+	 * Agrega un pedido.
+	 */
+	public void agregarPedido(Pedido unPedido) {
+		this.pedidos.add(unPedido);
+	}
+	
+	/**
+	 * Agrega un stock de una presentacion.
+	 */
+	public void agregarStock(Stock unStock) {
+		this.stock.add(unStock);
 	}
 }
