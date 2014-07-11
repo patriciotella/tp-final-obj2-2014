@@ -1,0 +1,68 @@
+package test;
+
+import static org.junit.Assert.*;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import productos.Oferta;
+import productos.PresentacionEnOferta;
+import sistema.SistemaVentas;
+import sistema.Tienda;
+import ventas.Venta;
+
+public class SistemaDeVentasTest {
+
+	SistemaVentas sistema;
+	List<Oferta> ofertas;
+	List<Tienda> sucursales;
+	Oferta oferta1, oferta2, oferta3;
+	Tienda tienda1, tienda2, tienda3;
+	
+	@Before
+	public void setUp() throws Exception {
+		
+		oferta1 = Mockito.mock(Oferta.class);
+		oferta2 = Mockito.mock(Oferta.class);
+		oferta3 = Mockito.mock(Oferta.class);
+		ofertas.add(oferta1);
+		ofertas.add(oferta2);
+		
+		tienda1 = Mockito.mock(Tienda.class); 
+		tienda2 = Mockito.mock(Tienda.class); 
+		tienda3 = Mockito.mock(Tienda.class);
+		sucursales.add(tienda1);
+		sucursales.add(tienda2);
+		
+		sistema = new SistemaVentas(sucursales, ofertas);
+	}
+
+	@Test
+	public void testAgregarOferta() {
+		sistema.agregarOferta(oferta3);
+		assertTrue(sistema.getOfertas().contains(oferta3));
+	}
+	
+	//Notificar como se testea?
+	
+	public void testGetOfertas() {
+		assertEquals(sistema.getOfertas(), ofertas);
+	}
+	
+	public void testGetVentas() {
+		Venta venta1 = Mockito.mock(Venta.class);	
+		Venta venta2 = Mockito.mock(Venta.class);
+		List<Venta> ventas = new LinkedList<Venta>();
+		ventas.add(venta1);
+		ventas.add(venta2);
+		Mockito.when(tienda1.getVentasRealizadas()).thenReturn(ventas);
+		Mockito.when(tienda2.getVentasRealizadas()).thenReturn(ventas);
+		
+		assertTrue(sistema.getVentas().contains(ventas));
+	}
+
+
+}
