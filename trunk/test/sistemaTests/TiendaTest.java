@@ -1,4 +1,4 @@
-package test;
+package sistemaTests;
 
 import static org.junit.Assert.*;
 
@@ -13,8 +13,11 @@ import productos.Presentacion;
 import productos.Stock;
 import productos.Ubicacion;
 import sistema.Cliente;
+import sistema.ConfiguracionDeDevolucionDeDinero;
+import sistema.DevolucionPorCtaCte;
 import sistema.PresentacionNotFoundException;
 import sistema.Tienda;
+import sistema.VentaNoEncontradaException;
 import ventas.Pedido;
 import ventas.Venta;
 
@@ -27,6 +30,7 @@ public class TiendaTest {
 	Stock stock1, stock2, stock3;
 	Presentacion presentacion1;
 	Pedido pedido;
+
 	@Before
 	public void setUp() {
 
@@ -73,7 +77,7 @@ public class TiendaTest {
 		Mockito.when(stock1.esStockMinimo()).thenReturn(true);
 		Mockito.when(stock2.esStockMinimo()).thenReturn(false);
 		Mockito.when(stock3.esStockMinimo()).thenReturn(true);
-		
+
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock1));
 		assertFalse(tienda.getPresentacionesConStockMinimo().contains(stock2));
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock3));
@@ -129,30 +133,37 @@ public class TiendaTest {
 
 		assertEquals(tienda.getGanancia(), 75.75f, 0f);
 	}
-	
+
 	@Test
 	public void testAgregarPedido() {
 		tienda.agregarPedido(pedido);
 		assertTrue(tienda.getPedidos().contains(pedido));
 	}
-	
+
 	@Test
 	public void testHayStockSuficienteParaRealizarVentaDe()
 			throws PresentacionNotFoundException {
-		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(true);
-		Mockito.when(stock1.hayStockSuficienteParaRealizarVenta(20)).thenReturn(true);
-		assertTrue(tienda.hayStockSuficienteParaRealizarVentaDe(presentacion1, 20));
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(
+				true);
+		Mockito.when(stock1.hayStockSuficienteParaRealizarVenta(20))
+				.thenReturn(true);
+		assertTrue(tienda.hayStockSuficienteParaRealizarVentaDe(presentacion1,
+				20));
 	}
-	
+
 	@Test
 	public void testNoHayStockSuficienteParaRealizarVentaDe()
 			throws PresentacionNotFoundException {
-		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(false);
-		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(true);
-		Mockito.when(stock2.hayStockSuficienteParaRealizarVenta(20)).thenReturn(false);
-		assertFalse(tienda.hayStockSuficienteParaRealizarVentaDe(presentacion1, 20));
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(
+				false);
+		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(
+				true);
+		Mockito.when(stock2.hayStockSuficienteParaRealizarVenta(20))
+				.thenReturn(false);
+		assertFalse(tienda.hayStockSuficienteParaRealizarVentaDe(presentacion1,
+				20));
 	}
-	
+
 	@Test
 	public void testCrearTiendaSinVentasNiStockNiPedidos() {
 		Tienda tiendaVacia = new Tienda();
@@ -163,22 +174,66 @@ public class TiendaTest {
 		tiendaVacia.agregarStock(stock1);
 		assertFalse(tiendaVacia.getStock().isEmpty());
 	}
-	
+
 	@Test(expected = PresentacionNotFoundException.class)
-	public void testBuscarStockDePresetancion() throws PresentacionNotFoundException {
-		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(false);
-		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(false);
-		Mockito.when(stock3.esStockDePresentacion(presentacion1)).thenReturn(false);
+	public void testBuscarStockDePresetancion()
+			throws PresentacionNotFoundException {
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(
+				false);
+		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(
+				false);
+		Mockito.when(stock3.esStockDePresentacion(presentacion1)).thenReturn(
+				false);
 		tienda.buscarStockDePresentacion(presentacion1);
 	}
-	
+
 	@Test(expected = PresentacionNotFoundException.class)
 	public void testNoEncuentraPresentacionParaUbicar()
 			throws PresentacionNotFoundException {
-		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(false);
-		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(false);
-		Mockito.when(stock3.esStockDePresentacion(presentacion1)).thenReturn(false);
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(
+				false);
+		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(
+				false);
+		Mockito.when(stock3.esStockDePresentacion(presentacion1)).thenReturn(
+				false);
 		Ubicacion unaUbicacion = Mockito.mock(Ubicacion.class);
 		tienda.ubicarPresentacion(presentacion1, unaUbicacion);
+	}
+
+	@Test
+	public void testCambiarArticulo() {
+		ConfiguracionDeDevolucionDeDinero configuracion = Mockito
+				.mock(DevolucionPorCtaCte.class);
+		presentacion1 = Mockito.mock(Presentacion.class);
+		Presentacion presentacion2 = Mockito.mock(Presentacion.class);
+		Mockito.when(presentacion2.getPrecio()).thenReturn(2f);
+		Mockito.when(presentacion1.getPrecio()).thenReturn(5f);
+		tienda.setConfiguracionDeDevolucionDeDinero(configuracion);
+		tienda.cambiarArticulo(presentacion1, presentacion2, venta1);
+		Mockito.verify(presentacion1).getPrecio();
+		Mockito.verify(presentacion2).getPrecio();
+		Mockito.verify(configuracion).pagarlaDiferencia(venta1, 3f);
+	}
+	
+	@Test
+	public void testDevolverVenta() throws VentaNoEncontradaException {
+		ConfiguracionDeDevolucionDeDinero configuracion = Mockito
+				.mock(DevolucionPorCtaCte.class);
+		tienda.setConfiguracionDeDevolucionDeDinero(configuracion);
+		Mockito.when(venta2.getMonto()).thenReturn(333f);
+		tienda.devolver(venta2);
+		Mockito.verify(configuracion).devolverDineroACliente(venta2, 333f);
+		Mockito.verify(venta2).cancelarCompraDeArticulos();
+		assertFalse(tienda.getVentasRealizadas().contains(venta2));
+	}
+	
+	@Test(expected = VentaNoEncontradaException.class)
+	public void testDevolverVentaLevantaException()
+			throws VentaNoEncontradaException {
+		ConfiguracionDeDevolucionDeDinero configuracion = Mockito
+				.mock(DevolucionPorCtaCte.class);
+		tienda.setConfiguracionDeDevolucionDeDinero(configuracion);
+		Mockito.when(venta1.getMonto()).thenReturn(333f);
+		tienda.devolver(venta1);
 	}
 }

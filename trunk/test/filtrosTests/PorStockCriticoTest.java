@@ -1,4 +1,4 @@
-package test;
+package filtrosTests;
 
 import static org.junit.Assert.*;
 
@@ -7,31 +7,32 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import productos.Stock;
-import filtros.PorStockMinimo;
+import filtros.PorStockCritico;
 
-public class PorStockMinimoTest {
-
-	PorStockMinimo criterioFiltro;
+public class PorStockCriticoTest {
+	PorStockCritico criterioFiltro;
 	Stock stock;
 	
 	@Before
 	public void setUp() {
 		stock = Mockito.mock(Stock.class);
-		criterioFiltro = new PorStockMinimo();
+		criterioFiltro = new PorStockCritico();
 	}
 
 	@Test
 	public void testCumpleCriterioDeFiltro() {
-		Mockito.when(stock.esStockMinimo()).thenReturn(true);
-		assertTrue(criterioFiltro.cumpleCriterioDeFiltro(stock));
-		Mockito.verify(stock, Mockito.times(1)).esStockMinimo();
-	}
 
+		Mockito.when(stock.esStockCritico()).thenReturn(true);
+		assertTrue(criterioFiltro.cumpleCriterioDeFiltro(stock));
+		Mockito.verify(stock, Mockito.times(1)).esStockCritico();
+	}
+	
 	@Test
 	public void testNoCumpleCriterioDeFiltro() {
-		Mockito.when(stock.esStockMinimo()).thenReturn(false);
+
+		Mockito.when(stock.esStockCritico()).thenReturn(false);
 		assertFalse(criterioFiltro.cumpleCriterioDeFiltro(stock));
-		Mockito.verify(stock, Mockito.times(1)).esStockMinimo();
+		Mockito.verify(stock, Mockito.times(1)).esStockCritico();
 	}
 
 }

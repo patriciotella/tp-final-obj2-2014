@@ -12,10 +12,11 @@ public class DevolucionPorCtaCte extends ConfiguracionDeDevolucionDeDinero {
 
 	@Override
 	public void pagarlaDiferencia(Venta unaVenta, float unMonto) {
-		try{
+		try {
 			unaVenta.getCliente().getCuentaCorriente().descontarSaldo(unMonto);
-		}catch (NoTieneSaldoSuficienteParaRealizarOperacionException e){
-			System.out.println("Compra imposible de realizar por falta de stock");
+		} catch (NoTieneSaldoSuficienteParaRealizarOperacionException e) {
+			System.out
+					.println("Compra imposible de realizar por falta de stock");
 		}
 
 	}

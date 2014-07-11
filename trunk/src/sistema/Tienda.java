@@ -126,8 +126,8 @@ public class Tienda {
 	}
 
 	/**
-	 * Busca y retorna la presentaci�n en la tienda, si no la encuentra
-	 * levanta una PresentacionNotFoundException.
+	 * Busca y retorna la presentaci�n en la tienda, si no la encuentra levanta
+	 * una PresentacionNotFoundException.
 	 * 
 	 * @param unaPresentacion
 	 * @return
@@ -158,8 +158,7 @@ public class Tienda {
 	/**
 	 * Se devuelve la venta entera, esto quiere decir, los articulos vuelven a
 	 * estar en stock, la venta queda cancelada (se borra) y se devuelve parcial
-	 * o totalmente el dinero al cliente, dependiendo de cómo esté
-	 * configurado.
+	 * o totalmente el dinero al cliente, dependiendo de cómo esté configurado.
 	 * 
 	 * @param unaVenta
 	 *            Si la venta no fue realizada en la tienda:
@@ -167,7 +166,8 @@ public class Tienda {
 	 */
 	public void devolver(Venta unaVenta) throws VentaNoEncontradaException {
 		if (this.ventas.contains(unaVenta)) {
-			this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta,unaVenta.getMonto());
+			this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta,
+					unaVenta.getMonto());
 			unaVenta.cancelarCompraDeArticulos();
 			this.ventas.remove(unaVenta);
 		} else
@@ -179,25 +179,25 @@ public class Tienda {
 	 * lleva otro abonando la diferencia,o si el saldo es a su favor, se le
 	 * genera una nota de crédito o se devuelve la diferencia al cliente. El
 	 * artículo que cambia vuelve a estar en stock. La acción a tomar es
-	 * responsabilidad del vendedor (depende de la configura- ción de
-	 * devolución de dinero.
+	 * responsabilidad del vendedor (depende de la configura- ción de devolución
+	 * de dinero.
 	 * 
 	 * @param unArticulo
 	 * @param unaVenta
 	 */
-	public void cambiarArticulo(Articulo articuloNuevo,Articulo articuloViejo, Venta unaVenta) {
-		//HAY QUE VER SI ESTA BIEN!!!
-		//LO QUE HICE FUE DAR LAS 2 OPCIONES Y LA FORMA DE DEVOLUCION QUE SE ENCARGUE.
-		//SI VALEN LO MISMO NO HACE NADA
-		float diferencia = articuloNuevo.getPrecio() - articuloViejo.getPrecio();
+	public void cambiarArticulo(Articulo articuloNuevo, Articulo articuloViejo,
+			Venta unaVenta) {
+		float diferencia = articuloNuevo.getPrecio()
+				- articuloViejo.getPrecio();
 		unaVenta.cancelarCompraDeArticulo(articuloViejo);
 		unaVenta.agregarArticuloALaCompra(articuloNuevo);
-		if (diferencia > 0){
-			this.formaDevolucionDeDinero.pagarlaDiferencia(unaVenta,diferencia);
-		}
-		else{
-			if(diferencia > 0){
-				this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta,diferencia);
+		if (diferencia > 0) {
+			this.formaDevolucionDeDinero
+					.pagarlaDiferencia(unaVenta, diferencia);
+		} else {
+			if (diferencia > 0) {
+				this.formaDevolucionDeDinero.devolverDineroACliente(unaVenta,
+						diferencia);
 			}
 		}
 	}
@@ -215,8 +215,8 @@ public class Tienda {
 
 	/**
 	 * Retorna true si hay stock suficiente en la tienda para realizar la venta
-	 * de una presentación. Quiere decir, si la cantidad disponible en la
-	 * tienda alcanza para satisfacer la compra.
+	 * de una presentación. Quiere decir, si la cantidad disponible en la tienda
+	 * alcanza para satisfacer la compra.
 	 * 
 	 * @param unaPresentacion
 	 * @param cantidadDeUnidadesDeLaPresentacion
@@ -248,26 +248,31 @@ public class Tienda {
 		throw new PresentacionNotFoundException(
 				"No se encontro el stock de la presentacion.");
 	}
-	
+
 	/**
 	 * Retorna la lista de pedidos.
+	 * 
 	 * @return
 	 */
 	public List<Pedido> getPedidos() {
 		return this.pedidos;
 	}
-	
+
 	/**
 	 * Agrega un pedido.
 	 */
 	public void agregarPedido(Pedido unPedido) {
 		this.pedidos.add(unPedido);
 	}
-	
+
 	/**
 	 * Agrega un stock de una presentacion.
 	 */
 	public void agregarStock(Stock unStock) {
 		this.stock.add(unStock);
+	}
+	
+	public void setFormaDeDevolucionDeDinero(ConfiguracionDeDevolucionDeDinero unaConfiguracion) {
+		this.formaDevolucionDeDinero = unaConfiguracion;
 	}
 }

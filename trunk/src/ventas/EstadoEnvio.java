@@ -13,8 +13,8 @@ public abstract class EstadoEnvio {
 	 * 
 	 * @return boolean.
 	 */
-	public boolean debeAbonarAlgoEnEntrega() throws Exception {
-		throw new Exception("Solo el envio en proceso tiene este dato");
+	public boolean debeAbonarAlgoEnEntrega() throws EnvioEnProcesoException {
+		throw new EnvioEnProcesoException("Solo el envio en proceso tiene este dato");
 	}
 
 	/**
@@ -22,8 +22,8 @@ public abstract class EstadoEnvio {
 	 * 
 	 * @return Double.
 	 */
-	public Float cantidadQueDebeAbonar() throws Exception {
-		throw new Exception("Solo el envio en proceso tiene este dato");
+	public Float cantidadQueDebeAbonar() throws EnvioEnProcesoException {
+		throw new EnvioEnProcesoException("Solo el envio en proceso tiene este dato");
 	}
 
 	protected EntregaADomicilio getEntregaADomicilio() {
@@ -37,7 +37,7 @@ public abstract class EstadoEnvio {
 			EntregaPagaException;
 
 	public abstract void reprogramar() throws EnvioCanceladoException,
-			EntregaPagaException, Exception;
+			EntregaPagaException, EnvioPendienteException;
 
 	public float getGananciaDeVenta() {
 		return 0;

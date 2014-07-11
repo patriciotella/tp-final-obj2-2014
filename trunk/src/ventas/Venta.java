@@ -128,11 +128,5 @@ public abstract class Venta {
 			System.out.println("Compra imposible de realizar por falta de stock");
 		}
 	}
-	/*public void setFecha(LocalDate unaFecha) {
-		this.fecha = unaFecha;
-	}
-	
-	public void setCliente(Cliente unCliente) {
-		this.cliente = unCliente;
-	}*/
+
 }

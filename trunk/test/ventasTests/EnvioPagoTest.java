@@ -1,15 +1,11 @@
-package test;
+package ventasTests;
 
 import static org.junit.Assert.*;
-
-import java.util.LinkedList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import productos.Articulo;
 import ventas.EntregaADomicilio;
 import ventas.EntregaPagaException;
 import ventas.EnvioPago;
@@ -40,6 +36,7 @@ public class EnvioPagoTest {
 		envioPago.reprogramar();
 	}
 	
+	@Test
 	public void testGetGananciaDeVenta() {
 		Mockito.when(entrega.getGanancia()).thenReturn(35.5f);
 		assertEquals(envioPago.getGananciaDeVenta(), 35.5f, 0f);
