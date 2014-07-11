@@ -1,4 +1,4 @@
-package test;
+package productosTests;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +21,7 @@ public class ProductoTest {
 	@Before
 	public void setUp() {
 		unaListaDePresentaciones = new ArrayList<Presentacion>();
-		unProducto = new Producto("Yerba", "unaDescripcion", "Taragüi",
+		unProducto = new Producto("Yerba", "unaDescripcion", "Taragï¿½i",
 				"unTipo", unaListaDePresentaciones);
 		unaPresentacion = Mockito.mock(Presentacion.class);
 	}
@@ -33,7 +33,7 @@ public class ProductoTest {
 
 	@Test
 	public void testGetMarca() {
-		assertEquals(unProducto.getMarca(), "Taragüi");
+		assertEquals(unProducto.getMarca(), "Taragï¿½i");
 	}
 
 	@Test

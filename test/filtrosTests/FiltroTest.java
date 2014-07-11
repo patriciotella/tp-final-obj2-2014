@@ -1,4 +1,4 @@
-package test;
+package filtrosTests;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import productos.Stock;
-import sistema.Cliente;
 import ventas.Venta;
 import ventas.VentaDirecta;
 import filtros.Criterio;

@@ -1,4 +1,4 @@
-package test;
+package sistemaTests;
 
 import static org.junit.Assert.*;
 
@@ -23,17 +23,19 @@ public class SistemaDeVentasTest {
 	Tienda tienda1, tienda2, tienda3;
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		
 		oferta1 = Mockito.mock(Oferta.class);
 		oferta2 = Mockito.mock(Oferta.class);
 		oferta3 = Mockito.mock(Oferta.class);
+		ofertas = new LinkedList<Oferta>();
 		ofertas.add(oferta1);
 		ofertas.add(oferta2);
 		
 		tienda1 = Mockito.mock(Tienda.class); 
 		tienda2 = Mockito.mock(Tienda.class); 
 		tienda3 = Mockito.mock(Tienda.class);
+		sucursales = new LinkedList<Tienda>();
 		sucursales.add(tienda1);
 		sucursales.add(tienda2);
 		
@@ -46,12 +48,12 @@ public class SistemaDeVentasTest {
 		assertTrue(sistema.getOfertas().contains(oferta3));
 	}
 	
-	//Notificar como se testea?
-	
+	@Test
 	public void testGetOfertas() {
 		assertEquals(sistema.getOfertas(), ofertas);
 	}
 	
+	@Test
 	public void testGetVentas() {
 		Venta venta1 = Mockito.mock(Venta.class);	
 		Venta venta2 = Mockito.mock(Venta.class);
@@ -61,7 +63,8 @@ public class SistemaDeVentasTest {
 		Mockito.when(tienda1.getVentasRealizadas()).thenReturn(ventas);
 		Mockito.when(tienda2.getVentasRealizadas()).thenReturn(ventas);
 		
-		assertTrue(sistema.getVentas().contains(ventas));
+		assertTrue(sistema.getVentas().contains(venta1));
+		assertTrue(sistema.getVentas().contains(venta2));
 	}
 
 

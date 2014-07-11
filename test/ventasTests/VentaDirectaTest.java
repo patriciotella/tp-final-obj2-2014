@@ -1,4 +1,4 @@
-package test;
+package ventasTests;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import productos.Articulo;
+import productos.ArticuloSinStockException;
 import sistema.Cliente;
 import ventas.VentaDirecta;
 
@@ -21,7 +22,7 @@ public class VentaDirectaTest {
 	Articulo articulo2;
 	Articulo articulo3;
 	List<Articulo> articulos;
-	
+
 	@Before
 	public void setUp() {
 		unCliente = Mockito.mock(Cliente.class);
@@ -34,7 +35,7 @@ public class VentaDirectaTest {
 		articulos.add(articulo3);
 		unaVentaDirecta = new VentaDirecta(articulos, unCliente, null);
 	}
-	
+
 	@Test
 	public void testGetMonto() {
 		Mockito.when(articulo1.getPrecio()).thenReturn(20f);
@@ -45,16 +46,35 @@ public class VentaDirectaTest {
 		Mockito.verify(articulo2).getPrecio();
 		Mockito.verify(articulo3).getPrecio();
 	}
-	
+
 	@Test
 	public void testGetCliente() {
 		assertEquals(unaVentaDirecta.getCliente(), unCliente);
 	}
-	
+
 	@Test
 	public void testGetDetalle() {
 		assertEquals(unaVentaDirecta.getDetalle(), articulos);
 	}
 
-	
+	@Test
+	public void testCancelarCompraDeArticulo() {
+		unaVentaDirecta.cancelarCompraDeArticulo(articulo1);
+		Mockito.verify(articulo1).cancelarCompraDeArticulo();
+	}
+
+	@Test
+	public void testAgregarArticuloALaCompra() throws ArticuloSinStockException {
+		unaVentaDirecta.agregarArticuloALaCompra(articulo2);
+		Mockito.verify(articulo2, Mockito.times(2)).descontarStockDeVenta(1);
+	}
+
+	@Test
+	public void testAgregarArticuloSinStockALaVenta()
+			throws ArticuloSinStockException {
+		Mockito.doThrow(ArticuloSinStockException.class).when(articulo3)
+				.descontarStockDeVenta(1);
+		unaVentaDirecta.agregarArticuloALaCompra(articulo3);
+	}
+
 }

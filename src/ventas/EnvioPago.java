@@ -1,6 +1,5 @@
 package ventas;
 
-import productos.Articulo;
 
 public class EnvioPago extends EstadoEnvio {
 

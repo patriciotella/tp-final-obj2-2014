@@ -18,7 +18,7 @@ public class Pendiente extends EstadoEnvio {
 	}
 
 	@Override
-	public void reprogramar() throws Exception {
+	public void reprogramar() throws EnvioPendienteException {
 		throw new EnvioPendienteException("La entrega aun esta pendiente.");
 	}
 

@@ -1,4 +1,4 @@
-package test;
+package filtrosTests;
 
 import static org.junit.Assert.*;
 

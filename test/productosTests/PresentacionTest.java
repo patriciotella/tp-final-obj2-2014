@@ -1,4 +1,4 @@
-package test;
+package productosTests;
 
 import static org.junit.Assert.*;
 
@@ -31,7 +31,7 @@ public class PresentacionTest {
 		unaPresentacion = new Presentacion("unCodigo", 10, 5, 15f, 25f,
 				unProducto, unaUbicacion, "kg");
 		Mockito.when(unProducto.getNombre()).thenReturn("Yerba");
-		Mockito.when(unProducto.getMarca()).thenReturn("Taragüi");
+		Mockito.when(unProducto.getMarca()).thenReturn("Taragï¿½i");
 		Mockito.when(unProducto.getDescripcion()).thenReturn("unaDescripcion");
 		Mockito.when(unProducto.getTipo()).thenReturn("unTipo");
 	}
@@ -68,7 +68,7 @@ public class PresentacionTest {
 
 	@Test
 	public void getMarcaTest() {
-		assertEquals(unaPresentacion.getMarca(), "Taragüi");
+		assertEquals(unaPresentacion.getMarca(), "Taragï¿½i");
 	}
 
 	@Test

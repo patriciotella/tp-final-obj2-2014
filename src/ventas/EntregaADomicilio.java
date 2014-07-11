@@ -49,4 +49,8 @@ public class EntregaADomicilio extends Venta {
 	public float getGanancia() {
 		return this.estado.getGananciaDeVenta();
 	}
+	
+	public EstadoEnvio getEstadoDeEnvio() {
+		return this.estado;
+	}
 }
