@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import productos.Oferta;
-import productos.PresentacionEnOferta;
 import sistema.SistemaVentas;
 import sistema.Tienda;
 import ventas.Venta;
