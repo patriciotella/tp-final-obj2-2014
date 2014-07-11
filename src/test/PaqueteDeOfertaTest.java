@@ -71,13 +71,13 @@ public class PaqueteDeOfertaTest {
 	
 	@Test
 	public void testGetPrecioCompra(){
-		Mockito.when(caramelo.getPrecioCompra()).thenReturn(2f);
-		Mockito.when(chicle.getPrecioCompra()).thenReturn(3f);
-		Mockito.when(tetra.getPrecioCompra()).thenReturn(5f);
-		assertEquals(unPaquete.getPrecioCompra(), 10f, 0f);
-		Mockito.verify(caramelo).getPrecioCompra();
-		Mockito.verify(chicle).getPrecioCompra();
-		Mockito.verify(tetra).getPrecioCompra();
+		Mockito.when(caramelo.getPrecioDeCompra()).thenReturn(2f);
+		Mockito.when(chicle.getPrecioDeCompra()).thenReturn(3f);
+		Mockito.when(tetra.getPrecioDeCompra()).thenReturn(5f);
+		assertEquals(unPaquete.getPrecioDeCompra(), 10f, 0f);
+		Mockito.verify(caramelo).getPrecioDeCompra();
+		Mockito.verify(chicle).getPrecioDeCompra();
+		Mockito.verify(tetra).getPrecioDeCompra();
 	}
 	
 	@Test

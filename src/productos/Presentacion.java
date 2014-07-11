@@ -1,5 +1,6 @@
 package productos;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class Presentacion implements Articulo {
 	private int stockCritico;
 	private float precioUnitarioCompra;
 	private float precioUnitarioVenta;
-	private List<Float> listaPrecios;
+	private List<Float> listaDePrecios;
 	private Producto producto;
 	private Ubicacion ubicacion;
 	private String unidadeDeMedida;
@@ -36,17 +37,19 @@ public class Presentacion implements Articulo {
 	 * @param ub
 	 * @param med
 	 */
-	public Presentacion(String cod, int smin, int scrit, float puc, float puv,
-			List<Float> list, Producto p, Ubicacion ub, String med) {
-		this.codigoBarras = cod;
-		this.stockMinimo = smin;
-		this.stockCritico = scrit;
-		this.precioUnitarioCompra = puc;
-		this.precioUnitarioVenta = puv;
-		this.listaPrecios = list;
-		this.producto = p;
-		this.ubicacion = ub;
-		this.unidadeDeMedida = med;
+	public Presentacion(String codigoDeBarra, int stockMinimo, int stockCritico,
+			float precioUnitarioCompra, float precioUnitarioVenta,
+			Producto producto, Ubicacion ubicacion, String unidadDeMedida) {
+		this.codigoBarras = codigoDeBarra;
+		this.stockMinimo = stockMinimo;
+		this.stockCritico = stockCritico;
+		this.precioUnitarioCompra = precioUnitarioCompra;
+		this.precioUnitarioVenta = precioUnitarioVenta;
+		this.listaDePrecios = new LinkedList<Float>();
+		this.listaDePrecios.add(this.precioUnitarioVenta);
+		this.producto = producto;
+		this.ubicacion = ubicacion;
+		this.unidadeDeMedida = unidadDeMedida;
 	}
 
 	/**
@@ -77,31 +80,13 @@ public class Presentacion implements Articulo {
 	}
 
 	/**
-	 * Retorn el precio unitario con el que se compro al producto.
-	 * 
-	 * @return float
-	 */
-	public float getPrecioUnitarioCompra() {
-		return this.precioUnitarioCompra;
-	}
-
-	/**
-	 * Retorna el precio unitario con el que se vendera al producto.
-	 * 
-	 * @return float
-	 */
-	public float getPrecioUnitarioVenta() {
-		return this.precioUnitarioVenta;
-	}
-
-	/**
 	 * Retorna la lista de precios por los cuales fue pasando la presentacion. a
 	 * lo largo del transcurso del tiempo.
 	 * 
 	 * @return List<Float>
 	 */
 	public List<Float> getListaDePrecios() {
-		return this.listaPrecios;
+		return this.listaDePrecios;
 	}
 
 	/**
@@ -122,12 +107,14 @@ public class Presentacion implements Articulo {
 		return this.producto.getMarca();
 	}
 
-	// ESTE METODO CREO QUE NO DEBERIA SER PROPIO DE LA PRESENTACION SINO DEL
-	// PRODUCTO
-	// UNA PRESENTACION NO TIENE PORQUE SABER LAS OTRAS PRESENTACIONES CON LAS
-	// QUE VIENE EL PRODUCTO. NOSIERTO?
-	public List<Presentacion> getPresentaciones() {
-		return this.producto.getPresentaciones();
+	/**
+	 * Actualiza el precio de venta al público. El nuevo precio se agrega a la lista
+	 * de precios de la presentación.
+	 * @param precioDeVentaNuevo
+	 */
+	public void modificarPrecioDeVenta(float precioDeVentaNuevo) {
+		this.precioUnitarioVenta = precioDeVentaNuevo;
+		this.listaDePrecios.add(precioDeVentaNuevo);
 	}
 
 	/**
@@ -216,32 +203,65 @@ public class Presentacion implements Articulo {
 		this.ubicacion = unaUbicacion;
 	}
 
+	/**
+	 * Retorna el precio unitario con el que se vendera al producto.
+	 * @return float
+	 */
 	@Override
 	public float getPrecio() {
 		return this.precioUnitarioVenta;
 	}
 
+	/**
+	 * Retorn el precio unitario con el que se compro al producto.
+	 * 
+	 * @return float
+	 */
 	@Override
-	public float getPrecioCompra() {
+	public float getPrecioDeCompra() {
 		return this.precioUnitarioCompra;
 	}
 
+	/**
+	 * Descuenta del stock que hay de la presentación en la tienda la cantidad de 
+	 * unidades vendidas en una venta.
+	 */
 	@Override
-	public void descontarStockDeVenta(int unaCantidadDeArticulos) throws ArticuloSinStockException {
+	public void descontarStockDeVenta(int unaCantidadDeArticulos)
+			throws ArticuloSinStockException {
 		this.stock.restarCantidad(unaCantidadDeArticulos);
 	}
-	
+
+	/**
+	 * Settea el stock de la presentación en la tienda.
+	 * @param unStock
+	 */
 	public void setStock(Stock unStock) {
 		this.stock = unStock;
 	}
 
+	/**
+	 * Retorna el stock de la presentación en una tienda.
+	 * @return
+	 */
+	public Stock getStock() {
+		return this.stock;
+	}
+
+	/**
+	 * Cancela la compra de una presentación, esto quiere decir, sumarle una unidad a
+	 * su stock.
+	 */
 	@Override
 	public void cancelarCompraDeArticulo() {
 		this.stock.sumarCantidad(1);
 	}
 
+	/**
+	 * Retorna la ganancia que produce la venta de la presentación.
+	 */
 	@Override
 	public float getGanancia() {
-		return this.precioUnitarioVenta-this.precioUnitarioCompra;
+		return this.precioUnitarioVenta - this.precioUnitarioCompra;
 	}
 }

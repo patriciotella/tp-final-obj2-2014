@@ -28,10 +28,4 @@ public abstract class Oferta implements Articulo {
 		this.descuento = descuento;
 	}
 
-	//public abstract float calcularPrecio();
-	
-	public abstract float getPrecio();
-	
-	public abstract float getPrecioCompra();
-
 }

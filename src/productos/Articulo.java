@@ -17,7 +17,7 @@ public interface Articulo {
 	 * 
 	 * @return float
 	 */
-	public float getPrecioCompra();
+	public float getPrecioDeCompra();
 
 	public float getGanancia();
 

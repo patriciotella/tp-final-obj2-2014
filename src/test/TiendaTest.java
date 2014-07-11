@@ -15,6 +15,7 @@ import productos.Ubicacion;
 import sistema.Cliente;
 import sistema.PresentacionNotFoundException;
 import sistema.Tienda;
+import ventas.Pedido;
 import ventas.Venta;
 
 public class TiendaTest {
@@ -24,8 +25,8 @@ public class TiendaTest {
 	List<Stock> stock;
 	Venta venta1, venta2, venta3;
 	Stock stock1, stock2, stock3;
-	Presentacion presentacion1, presentacion2, presentacion3;
-
+	Presentacion presentacion1;
+	Pedido pedido;
 	@Before
 	public void setUp() {
 
@@ -44,7 +45,8 @@ public class TiendaTest {
 		stock.add(stock2);
 		stock.add(stock3);
 
-		tienda = new Tienda(stock, ventas);
+		pedido = Mockito.mock(Pedido.class);
+		tienda = new Tienda(stock, ventas, new LinkedList<Pedido>());
 	}
 
 	@Test
@@ -66,41 +68,12 @@ public class TiendaTest {
 		assertEquals(tienda.getStock(), stock);
 	}
 
-	/*
-	 * ESTE TEST FALLA Y SEGURO ES PORQUE HICE MUCHO LIO CON LOS MOKITOS ASHUDA
-	 * Tiraba NullPointerException y eso porque no estaban inicializadas las
-	 * variables de instancia antes de crear la tienda en el setUp.
-	 */
-
 	@Test
 	public void testGetPresentacionesConStockMinimo() {
-
-		/*
-		 * Presentacion presentacion1 = Mockito.mock(Presentacion.class);
-		 * Presentacion presentacion2 = Mockito.mock(Presentacion.class);
-		 * Presentacion presentacion3 = Mockito.mock(Presentacion.class);
-		 * 
-		 * Mockito.when(presentacion1.getStockMinimo()).thenReturn(23);
-		 * Mockito.when(presentacion2.getStockMinimo()).thenReturn(25);
-		 * Mockito.when(presentacion3.getStockMinimo()).thenReturn(40);
-		 * 
-		 * Stock stock1= new Stock(23, presentacion1); Stock stock2= new
-		 * Stock(30, presentacion2); Stock stock3= new Stock(40, presentacion3);
-		 */
-
 		Mockito.when(stock1.esStockMinimo()).thenReturn(true);
 		Mockito.when(stock2.esStockMinimo()).thenReturn(false);
 		Mockito.when(stock3.esStockMinimo()).thenReturn(true);
-		/*
-		 * stock = new LinkedList<Stock>(); stock.add(stock1);
-		 * stock.add(stock2); stock.add(stock3);
-		 * 
-		 * ventas = new LinkedList<Venta>(); ventas.add(venta3);
-		 * ventas.add(venta2);
-		 * 
-		 * tienda = new Tienda(stock, ventas);
-		 */
-
+		
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock1));
 		assertFalse(tienda.getPresentacionesConStockMinimo().contains(stock2));
 		assertTrue(tienda.getPresentacionesConStockMinimo().contains(stock3));
@@ -155,5 +128,57 @@ public class TiendaTest {
 		Mockito.when(venta3.getGanancia()).thenReturn(25.75f);
 
 		assertEquals(tienda.getGanancia(), 75.75f, 0f);
+	}
+	
+	@Test
+	public void testAgregarPedido() {
+		tienda.agregarPedido(pedido);
+		assertTrue(tienda.getPedidos().contains(pedido));
+	}
+	
+	@Test
+	public void testHayStockSuficienteParaRealizarVentaDe()
+			throws PresentacionNotFoundException {
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(true);
+		Mockito.when(stock1.hayStockSuficienteParaRealizarVenta(20)).thenReturn(true);
+		assertTrue(tienda.hayStockSuficienteParaRealizarVentaDe(presentacion1, 20));
+	}
+	
+	@Test
+	public void testNoHayStockSuficienteParaRealizarVentaDe()
+			throws PresentacionNotFoundException {
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(false);
+		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(true);
+		Mockito.when(stock2.hayStockSuficienteParaRealizarVenta(20)).thenReturn(false);
+		assertFalse(tienda.hayStockSuficienteParaRealizarVentaDe(presentacion1, 20));
+	}
+	
+	@Test
+	public void testCrearTiendaSinVentasNiStockNiPedidos() {
+		Tienda tiendaVacia = new Tienda();
+		assertEquals(tiendaVacia.getGanancia(), 0f, 0f);
+		assertTrue(tiendaVacia.getPedidos().isEmpty());
+		assertTrue(tiendaVacia.getStock().isEmpty());
+		assertTrue(tiendaVacia.getVentasRealizadas().isEmpty());
+		tiendaVacia.agregarStock(stock1);
+		assertFalse(tiendaVacia.getStock().isEmpty());
+	}
+	
+	@Test(expected = PresentacionNotFoundException.class)
+	public void testBuscarStockDePresetancion() throws PresentacionNotFoundException {
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(false);
+		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(false);
+		Mockito.when(stock3.esStockDePresentacion(presentacion1)).thenReturn(false);
+		tienda.buscarStockDePresentacion(presentacion1);
+	}
+	
+	@Test(expected = PresentacionNotFoundException.class)
+	public void testNoEncuentraPresentacionParaUbicar()
+			throws PresentacionNotFoundException {
+		Mockito.when(stock1.esStockDePresentacion(presentacion1)).thenReturn(false);
+		Mockito.when(stock2.esStockDePresentacion(presentacion1)).thenReturn(false);
+		Mockito.when(stock3.esStockDePresentacion(presentacion1)).thenReturn(false);
+		Ubicacion unaUbicacion = Mockito.mock(Ubicacion.class);
+		tienda.ubicarPresentacion(presentacion1, unaUbicacion);
 	}
 }

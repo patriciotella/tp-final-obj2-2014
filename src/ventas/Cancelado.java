@@ -14,7 +14,7 @@ public class Cancelado extends EstadoEnvio {
 	
 	@Override
 	public void cancelar() throws EnvioCanceladoException {
-		//throw new EnvioCanceladoException("El envio ya esta cancelado.");
+		
 	}
 	@Override
 	public void reprogramar() throws EnvioCanceladoException {
