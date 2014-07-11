@@ -100,11 +100,34 @@ public abstract class Venta {
 		return this.articulos.contains(unArticulo);
 	}
 	
+	/**
+	 * Cancela la compra de un articulo en particular, devolviendolo al stock
+	 * @param unArticulo
+	 */
+	public void cancelarCompraDeArticulo(Articulo unArticulo){
+		articulos.remove(unArticulo);
+		unArticulo.cancelarCompraDeArticulo();
+	}
+	/**
+	 * cancela la compra de todos los articulos de la venta, notificando al stock
+	 */
 	public void cancelarCompraDeArticulos() {
 		for(Articulo articulo : this.getDetalle())
 			articulo.cancelarCompraDeArticulo();
 	}
 	
+	/**
+	 * Incluye un articulo a la venta, depende del stock del mismo
+	 * @param unArticulo
+	 */
+	public void agregarArticuloALaCompra(Articulo unArticulo){
+		try{
+				articulos.add(unArticulo);
+				unArticulo.descontarStockDeVenta(1);
+		}catch (ArticuloSinStockException e){
+			System.out.println("Compra imposible de realizar por falta de stock");
+		}
+	}
 	/*public void setFecha(LocalDate unaFecha) {
 		this.fecha = unaFecha;
 	}
